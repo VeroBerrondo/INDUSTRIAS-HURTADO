@@ -20,9 +20,15 @@
     }
 }
 
-
-
 /*@media only screen and (min-width: 1500px)*/
+
+.button {
+    &.tool {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+    }
+}
 
 .navigation__wrapper {
     position: absolute;
@@ -48,36 +54,59 @@
     right: 0;
     padding: 10px;
     display: flex;
+    flex-direction: row;
     background: transparent;
     overflow-y: scroll;
-    .chat__wrapper {
-        top: 10px;
-        bottom: 10px;
-        right: -10px;
-        position: relative;
-        border: 1px solid #505050;
-        width: 40px;
-        background: #151515;
-        border-radius: 10px 0 0 10px;
-        height: calc(100% - 20px);
-        &.active {
-            border-radius: 10px;
-        }
-        .chat-tools__wrapper {
-            position: fixed;
-        }
-    }
-    .feed__wrapper {
-        align-items: center;
-        justify-content: center;
-        display: flex;
-        flex-wrap: wrap;
-        column-gap: 20px;
-        row-gap: 20px;
-        width: -webkit-fill-available;
-    }
     &::-webkit-scrollbar {width: 10px;}
     &::-webkit-scrollbar-track {background: #151515;}
     &::-webkit-scrollbar-thumb {background: #505050;}
     &::-webkit-scrollbar-thumb:hover {background: #550099;}
+    &.chat-active {
+        .chat__wrapper {
+            border-radius: 10px 10px 0 0;
+            width: 25%;
+            right: 20px;
+            bottom: 0;
+        }
+        .feed__wrapper {
+            width: 73.7%;
+        }
+        .chat-tools__wrapper {
+            right: 24.8%;
+        }
+    }
+}
+
+.chat__wrapper {
+    top: 10px;
+    bottom: 10px;
+    right: 10px;
+    position: fixed;
+    border: 1px solid #505050;
+    width: 50px;
+    background: #151515;
+    border-radius: 10px 0 0 10px;
+    transition: ease 1s;
+    .chat-tools__wrapper {
+        padding: 2.5px 0;
+        background-color: red;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        top: 20px;
+        left: 5px;
+        width: 40px;
+    }
+}
+
+.feed__wrapper {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 20px;
+    width: 98.2%;
+    transition: ease .5s;
 }

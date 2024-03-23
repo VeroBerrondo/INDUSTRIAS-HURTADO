@@ -13,7 +13,7 @@
     <div class="navigation__wrapper">
         <div></div>
     </div>
-    <div class="app__wrapper">
+    <div class="app__wrapper chat-active">
         <main class="feed__wrapper">
             <div class="card"></div>
             <div class="card"></div>
@@ -30,9 +30,23 @@
             <div class="card"></div>
             <div class="card"></div>
         </main>
-        <div class="chat__wrapper">
-            <div class="chat-tools__wrapper"></div>
+        <div class="chat__wrapper active">
+            <div class="chat-tools__wrapper">
+                <button class="button tool" onclick="button1()"></button>
+            </div>
         </div>
     </div>
+    <script>
+        function button1 () {
+            console.log("ejecutado...")
+            var appWrapper = document.getElementsByClassName("app__wrapper")[0];
+            var state = appWrapper.classList.contains("chat-active");
+            if (state == false) {
+                appWrapper.classList.add('chat-active');
+            } else {
+                appWrapper.classList.remove('chat-active');
+            }
+        }
+    </script>
 </body>
 </html>
