@@ -30,15 +30,12 @@
             <div class="card"></div>
             <div class="card"></div>
         </main>
-        <div class="chat__wrapper active">
-            <div class="chat-tools__wrapper">
-                <button class="button tool" onclick="button1()"></button>
-            </div>
+        <div class="profile__wrapper">
+            <div class="profile__content"></div>
         </div>
     </div>
     <script>
         function button1 () {
-            console.log("ejecutado...")
             var appWrapper = document.getElementsByClassName("app__wrapper")[0];
             var state = appWrapper.classList.contains("chat-active");
             if (state == false) {
