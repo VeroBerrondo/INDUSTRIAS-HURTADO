@@ -14,6 +14,10 @@ body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
+input:hover {
+    cursor: pointer;
+}
+
 input[type=text] {
     border: 4px solid rgb(236, 180, 60);
     border-radius: 6px;
@@ -33,7 +37,7 @@ input[type=password] {
     border: 4px solid rgb(236, 180, 60);
     border-radius: 6px;
     padding: 5px;
-    
+
 
 
 }
@@ -53,6 +57,7 @@ textarea {
     border-radius: 6px;
     background-color: rgba(242, 228, 150, 0.5);
     resize: none;
+    cursor: pointer;
 }
 
 input[type=reset] {
@@ -72,6 +77,7 @@ button {
     border: 4px solid rgb(236, 180, 60);
     border-radius: 6px;
     padding: 5px;
+    cursor: pointer;
 }
 
 .formulario-caja {
@@ -93,12 +99,11 @@ button {
     display: none;
     text-align: center;
     background-color: (255, 255, 255, 0.1);
-    border: 1px solid #f1e2b5;
     padding: 20px;
     border-radius: 5px;
-    width: 500px;
+    width: 100%;
     margin: 0 auto;
-    max-height: 300px;
+    height: 100%;
 
     &.visible {
         display: block;
@@ -190,11 +195,11 @@ header {
 
 
 
-.contrasena  {
+.contrasena {
     background-image: url(..//imgs/password-protection-privacy-access-verification-code-svgrepo-com.svg);
-    background-size: 20px 20px ;
-    background-position:right center ;
+    background-size: 20px 20px;
+    background-position: right center;
     background-repeat: no-repeat;
     padding-left: 40px;
-    
+
 }
