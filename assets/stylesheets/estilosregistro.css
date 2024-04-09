@@ -15,25 +15,25 @@ body {
 }
 
 input[type=text] {
-    border: 2px solid rgb(236, 180, 60);
+    border: 4px solid rgb(236, 180, 60);
     border-radius: 6px;
 
 }
 
 input[type=email] {
-    border: 2px solid rgb(236, 180, 60);
+    border: 4px solid rgb(236, 180, 60);
     border-radius: 6px;
 
 }
 
 input[type=password] {
-    border: 2px solid rgb(236, 180, 60);
+    border: 4px solid rgb(236, 180, 60);
     border-radius: 6px;
 
 }
 
 input[type=date] {
-    border: 2px solid rgb(236, 180, 60);
+    border: 4px solid rgb(236, 180, 60);
     border-radius: 6px;
 }
 
@@ -49,18 +49,18 @@ textarea {
 }
 
 input[type=reset] {
-    border: 2px solid rgb(236, 180, 60);
+    border: 4px solid rgb(236, 180, 60);
     border-radius: 6px;
 
 }
 
 input[type=submit] {
-    border: 2px solid rgb(236, 180, 60);
+    border: 4px solid rgb(236, 180, 60);
     border-radius: 6px;
 }
 
 button {
-    border: 2px solid rgb(236, 180, 60);
+    border: 4px solid rgb(236, 180, 60);
     border-radius: 6px;
 }
 
@@ -141,4 +141,36 @@ header {
     top: 0;
     right: 0;
     left: 0;
+}
+
+.email-input {
+    background-image: url(../imgs/email-1572-svgrepo-com.svg);
+    background-size: 20px 20px;
+    background-position: right center;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+}
+
+.nombre-input {
+    background-image: url(../imgs/personalcard-svgrepo-com.svg);
+    background-size: 20px 20px;
+    background-position: right center;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+}
+
+.apellido-input {
+    background-image: url(../imgs/personalcard-svgrepo-com.svg);
+    background-size: 20px 20px;
+    background-position: right center;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+}
+
+.usuario-input {
+    background-image: url(../imgs/user-silhouette-svgrepo-com.svg);
+    background-size: 20px 20px;
+    background-position: right center;
+    background-repeat: no-repeat;
+    padding-left: 40px;
 }
