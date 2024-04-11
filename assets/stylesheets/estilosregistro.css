@@ -10,7 +10,11 @@ body {
     background-attachment: fixed;
     height: 100%;
     text-align: center;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 
 input:hover {
@@ -210,11 +214,17 @@ header {
 }
 
 h1 {
+    
     font-family: cursive;
-    text-align: center;
-    background-image: url(..//imgs/heart-svgrepo-com.svg);
-    background-size: 25px 25px;
-    background-repeat: no-repeat;
-    background-position: center;
-    padding-left: 180px;
+    display: flex;
+    align-items:center;
+    gap:10px;
+    padding-left: 40%;
+}
+    
+.logo{ 
+    width: 25px;
+    height:auto;
+    
+    
 }
