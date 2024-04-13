@@ -89,8 +89,9 @@ button {
     background-color: (255, 255, 255, 0, 4);
     padding: 20px;
     width: 100%;
-    margin: auto;
+    margin: 50%;
     height: 100%;
+
     &.visible {
         display: block;
 
@@ -131,7 +132,7 @@ button {
 }
 
 main {
-
+    
     top: 50px;
     left: 0;
     right: 0;
@@ -143,9 +144,12 @@ main {
     justify-content: center;
 }
 
+
 footer {
+    flex-shrink: 0;
     position: absolute;
     background-color: rgb(236, 180, 60);
+    padding: 5px;
     bottom: 0;
     left: 0;
     right: 0;
@@ -153,8 +157,10 @@ footer {
 }
 
 header {
+    flex-shrink: 0;
     position: absolute;
     background-color: rgb(236, 180, 60);
+    padding: 5px;
     top: 0;
     right: 0;
     left: 0;
@@ -214,23 +220,23 @@ header {
 }
 
 h1 {
-    
+
     font-family: cursive;
     display: flex;
-    align-items:center;
-    gap:10px;
+    align-items: center;
+    gap: 10px;
     padding-left: 40%;
 }
-    
-.logo{ 
+
+.logo {
     width: 25px;
-    height:auto;
+    height: auto;
 }
-.checkbox{
+
+.checkbox {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-right: 5px;
 
 }
-
