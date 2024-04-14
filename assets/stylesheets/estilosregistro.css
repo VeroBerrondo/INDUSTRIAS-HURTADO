@@ -9,12 +9,13 @@ body {
     background-size: cover;
     background-attachment: fixed;
     height: 100%;
+    max-width: 100%;
     text-align: center;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
-
+    box-sizing: border-box;
 }
 
 input:hover {
@@ -87,13 +88,32 @@ button {
     display: none;
     text-align: center;
     background-color: (255, 255, 255, 0, 4);
-    padding:20px;
+    padding: 20px;
     width: 100%;
-    margin: 50%;
-    height: 100%;
+    max-width: 100%;
+    top: 50%;
+    left: 50%;
+
 
     &.visible {
         display: block;
+
+    }
+}
+
+@media(max-width:360px) {
+    .formulario-caja {
+        width: 100%;
+        margin: 0;
+        padding: 10px;
+        overflow: auto;
+    }
+}
+
+@media only screen and (max-height:400px) {
+    .formulario-caja {
+        position: static;
+        overflow-y: auto;
     }
 }
 
@@ -102,8 +122,10 @@ button {
     text-align: center;
     background-color: (255, 255, 255, 0.1);
     padding: 20px;
-    border-radius: 5px;
     width: 100%;
+    top: 50%;
+    left: 50%;
+    border-radius: 5px;
     margin: 0 auto;
     height: 100%;
 
@@ -146,7 +168,8 @@ main {
 
 footer {
     flex-shrink: 0;
-    position: absolute;
+    position: fixed;
+    width: 100%;
     background-color: rgb(236, 180, 60);
     padding: 5px;
     bottom: 0;
@@ -156,13 +179,20 @@ footer {
 }
 
 header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     flex-shrink: 0;
-    position: absolute;
+    position: fixed;
+    width: 100%;
     background-color: rgb(236, 180, 60);
     padding: 5px;
     top: 0;
     right: 0;
     left: 0;
+    gap: 10px;
+    font-family: cursive;
 }
 
 .email-input {
@@ -215,21 +245,13 @@ header {
     background-position: right center;
     background-repeat: no-repeat;
     padding-left: 40px;
-
-}
-
-h1 {
-
-    font-family: cursive;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding-left: 45%;
 }
 
 .logo {
-    width: 25px;
-    height: auto;
+    height: 30px;
+    width: auto;
+
+
 }
 
 .checkbox {
