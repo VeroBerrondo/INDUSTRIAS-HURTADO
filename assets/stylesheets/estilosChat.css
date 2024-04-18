@@ -114,6 +114,7 @@ h1 {
 
 h2 {
     font-family: cursive;
+    margin: 20px;
     display: flex;
     align-items: center;
     gap: 10px;
