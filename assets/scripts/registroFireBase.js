@@ -45,6 +45,7 @@ window.register = async function register() {
         console.error('Error en el registro:', error);
         alert('Error en el registro: ' + error.message);
     }
+    
 }
 
 
