@@ -2,35 +2,93 @@
     --color-black_1: #151515;
 }
 
-body {
-    background-color: #101010;
+.bg__wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: -1;
+    filter: hue-rotate(40deg) invert(1);
+    &::after {
+        content: "";
+        background-image: url(../imgs/pattern_6.jpg);
+        background-size: 400px;
+        display: flex;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/*@media only screen and (min-width: 1500px)*/
+
+.button {
+    &.tool {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+    }
 }
 
 .navigation__wrapper {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 70px;
-    background-color: transparent;
+    top: 10px;
+    bottom: 10px;
+    left: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    div {
-        border: 1px solid #505050;
-        background-color: #151515;
-        border-radius: 10px;
-        width: 50px;
-        height: calc(100% - 20px);
-    }
+    border: 1px solid #505050;
+    background-color: #151515;
+    border-radius: 10px;
+    width: 50px;
+    height: calc(100% - 20px);
 }
 
-main {
+.app__wrapper {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 70px;
+    left: 60px;
     right: 0;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
     background: transparent;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {width: 10px;}
+    &::-webkit-scrollbar-track {background: #151515;}
+    &::-webkit-scrollbar-thumb {background: #505050;}
+    &::-webkit-scrollbar-thumb:hover {background: #550099;}
+}
+
+.profile__wrapper {
+    width: 35%;
+    height: 100%;
+    position: relative;
+    .profile__content {
+        position: fixed;
+        border: 1px solid #505050;
+        top: 10px;
+        right: 20px;
+        left: calc(70% + 82px);
+        bottom: 10px;
+        background: #151515;
+        border-radius: 10px 10px;
+        transition: ease 1s;
+    }
+
+}
+
+.feed__wrapper {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 20px;
+    width: 100%;
+    transition: ease .5s;
 }
