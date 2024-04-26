@@ -18,9 +18,10 @@ main {
 
 
 footer {
+    color:white;
     flex-shrink: 0;
     position: absolute;
-    background-color: rgb(236, 180, 60);
+    background-color: black;
     padding: 5px;
     bottom: 0;
     left: 0;
@@ -29,12 +30,13 @@ footer {
 }
 
 header {
+    color:white;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     width: 100%;
-    background-color: rgb(236, 180, 60);
+    background-color:black;
     padding: 5px;
 }
 
