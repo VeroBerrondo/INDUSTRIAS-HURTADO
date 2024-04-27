@@ -52,6 +52,7 @@ onSnapshot(messagesQuery, (snapshot) => {
             const messageData = change.doc.data();
             const messageElement = document.createElement('div');
             messageElement.textContent = messageData.texto;
+            messageElement.classList.add("message");
             messagesContainer.appendChild(messageElement);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
@@ -60,4 +61,4 @@ onSnapshot(messagesQuery, (snapshot) => {
     document.getElementById('limpiarChat').addEventListener('click', function () {
         document.getElementById('mensajes').innerHTML = '';
     })
-});  
+});

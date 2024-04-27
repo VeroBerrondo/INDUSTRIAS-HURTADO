@@ -30,31 +30,32 @@
             <div class="card"></div>
             <div class="card"></div>
         </main>
-        <div class="profile__wrapper">
-            <div class="profile__content">
-                <main>
-                    <h2>Corazones en Linea</h2>
-                    <div id="chat">
-                        <div id="mensajes"> </div>
-                        <input type="text" id="mensajeInput" placeholder="Escribe un mensaje aquí..." autofocus>
-                        <button id="enviarBtn">Enviar</button>
-                        <button id="limpiarChat">Limpiar Chat</button>
+        <div class="miniApp__wrapper">
+            <div class="miniApp__content">
+                <div class="chat__wrapper" id="chat">
+                    <div class="chat__header">
+                        <p>Corazones en Linea</p>
+                        <nav>
+                            <button>tool 1</button>
+                            <button id="limpiarChat">Limpiar Chat</button>
+                        </nav>
                     </div>
-                </main>
+                    <div class="chat__body">
+                        <div class="message__wrapper" id="mensajes">
+                        </div>
+                        <div class="chatter__wrapper">
+                            <input type="text" id="mensajeInput" placeholder="Escribe un mensaje aquí..." autofocus>
+                            <button id="enviarBtn">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile__wrapper">
+
+                </div>
             </div>
         </div>
     </div>
-    <script>
-        function button1 () {
-            var appWrapper = document.getElementsByClassName("app__wrapper")[0];
-            var state = appWrapper.classList.contains("chat-active");
-            if (state == false) {
-                appWrapper.classList.add('chat-active');
-            } else {
-                appWrapper.classList.remove('chat-active');
-            }
-        }
-    </script>
-    <script type="module" src="assets/scripts/chat.js"></script>
+    <script src="../assets/scripts/main-script.js"></script>
+    <script type="module" src="../assets/scripts/chat-systems.js"></script>
 </body>
 </html>
