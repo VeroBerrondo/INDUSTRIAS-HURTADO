@@ -1,0 +1,442 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    
+}
+
+
+
+.banner {
+    display: flex;
+    min-height: 30px;
+    background-color: rgba(235, 80, 81, 0.7);
+    padding: 7px;
+    justify-content: space-between;
+    align-items: center;
+    grid-column: 1/13;
+}
+
+
+/* Acá empieza todo lo del Nav */
+.logo {
+    display: flex;
+    align-items: center;
+    
+
+}
+
+.logo-img {
+    height: 50px;
+    margin: 10px;
+    
+    
+}
+
+.nombre {
+    font-family: "Caveat", cursive;
+    font-size: 30px;
+    font-optical-sizing: auto;
+    font-style: normal;
+
+}
+
+a {
+    text-decoration: none;
+    color: wheat;
+    font-weight: bold;
+
+}
+
+nav a {
+    margin: 3px;
+    padding-right: 15px;
+    font-size: 15px;
+    text-decoration: none;
+    
+}
+
+nav a:hover {
+    color: rgb(20, 130, 163)
+}
+
+.button {
+
+    display: inline-block;
+    padding: 7px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: wheat;
+    background-color: rgb(43, 161, 197);
+    border: none;
+    border-radius: 7px;
+    box-shadow: 0 9px rgb(196, 36, 70);
+}
+
+.button:hover {
+    background-color: rgb(253, 86, 86)
+}
+
+.button:active {
+    background-color: rgba(172, 47, 20, 0.2);
+    box-shadow: 0 5px rgb(94, 203, 240);
+    transform: translateY(5px);
+    color: wheat;
+}
+
+
+@media (max-width:900px) {
+    header {
+        flex-direction: column
+    }
+    
+   
+}
+
+nav {
+    padding: 10px 0px;
+    
+
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    
+
+}
+
+.capa{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: url(./assets/imgs/pareja.jpg) no-repeat center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+}
+
+.capa-efecto{
+    width: 100%;
+    height: 100%;
+    border: 2px solid #fafafa10;
+
+}
+
+.efecto-glass{
+    background: #fafafa10;
+    backdrop-filter: blur(0.9rem);
+}
+
+/* Acá empieza el Main */
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    gap: 10px;
+    overflow: hidden;
+    align-items: center;
+    
+}
+.texto-inicio-400{
+    font-weight: 400;
+}
+
+.texto-inicio-600{
+    font-weight: 600;
+    color: rgb(4, 37, 48);
+    font-size: 50px;
+    font-family: caveat;
+    
+}
+
+.textos-inicio{
+    grid-column: 2/7;
+    padding-right: 60px;
+}
+
+.textos-inicio p{
+    text-align: justify;
+    margin-bottom: 20px;
+    line-height: 35px;
+    color: rgb(4, 37, 48);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.header{
+    height: 500px;
+
+}
+
+.img-pareja{
+    width: 100%;
+    height: auto;
+    grid-column: 7/13;
+    margin-top: 30px;
+    
+}
+.img{
+    width: 95%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    
+    
+}
+
+.button2 {
+
+    display: inline-block;
+    padding: 7px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: wheat;
+    background-color: rgb(43, 161, 197);
+    border: none;
+    border-radius: 7px;
+    box-shadow: 0 9px rgb(196, 36, 70);
+   
+   
+   
+}
+
+.button2:hover {
+    background-color: rgb(253, 86, 86)
+}
+
+.button2:active {
+    background-color: rgba(172, 47, 20, 0.2);
+    box-shadow: 0 5px rgb(94, 203, 240);
+    transform: translateY(5px);
+    color: wheat;
+}
+
+.textos-inicio a:hover {
+    color: rgb(20, 130, 163)
+}
+
+
+/* Sección de PASOS */
+
+.instrucciones{
+    text-align: center;
+    margin: 100px 100px 10px;
+    border-radius: 3%;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    background:  rgba(235,80,81);
+}
+
+.instrucciones h1{
+    color: rgb(7, 39, 49);
+    
+}
+
+.instruccionesFondo{
+    height: 370px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 50%, rgb(235,80,81) 50%);
+    padding-bottom: 40px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    
+    
+}
+
+.items{
+    grid-column: 1/-1;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-evenly;
+    align-content: center;
+    flex-wrap: wrap;
+    
+}
+
+
+.item{
+    width: 30%;
+    background: rgba(170, 208, 218, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    border-radius: 3%;
+    overflow: hidden;
+    height: 300px;
+    padding: 20px 10px;
+    text-align: center;
+    
+}
+
+.item p{
+    font-size: 20px;
+    text-align: center;
+    margin-top: 15px;
+    color: rgb(0, 0, 0);
+}
+.item h2{
+    color: rgb(0, 0, 0);
+    
+    
+}
+.paso{
+    margin: 25px 0;
+    
+}
+
+/* About us */
+
+.puntos{
+    background-color: white;
+    color: bisque;
+    height: 100px;
+    background: rgba(2, 32, 39, 0.5);
+}
+
+.textos-puntos{
+    grid-column: 1/-1;
+    text-align: center;
+    
+}
+
+.punto{
+    grid-column: 1/-1;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    
+}
+
+.itemCorazon{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 22%;
+
+}
+.corazon{
+    height: 70px;
+}
+    
+   
+/* Sección de testimonios */
+
+.historias {
+    padding: 80px 0;
+
+}
+
+.textos-historias{
+    grid-column: 7/12;
+    grid-row: 1/-1;
+    margin-bottom: 20px;
+  
+}
+
+.textos-historias h2{
+    color: bisque;
+    font-weight: 600px;
+    font-size: 70px;
+    font-family: caveat;
+
+}
+.textos-historias p{
+    line-height: 35px;
+    color: rgb(4, 37, 48);
+    font-size: 20px;
+    font-weight: 600;
+    
+}
+
+.img-historia{
+    grid-column: 2/7;
+    grid-row: 1/-1;
+}
+
+
+
+/* Acá empieza el footer */  
+
+footer{
+    display: flex;
+    background-color: rgb(235, 80, 81);
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    text-align: center;
+    margin-top: auto;
+    padding-top: 40px;
+    
+}
+
+.footerContainer{
+    width: 100%;
+    
+}
+
+.footerContainer p{
+    text-align: center;
+    font-size: 20px;
+    font-optical-sizing: auto;
+    color: beige;
+    
+
+}
+
+.socialIcons{
+    display:flex;
+    justify-content: center;
+    
+}
+
+.socialIcons a{
+    padding: 20px;
+    background-color: rgb(235, 80, 81);
+    margin: 40px;
+    border-radius: 10%;
+    
+}
+.socialIcons a:hover{
+    background-color: rgb(241, 150, 150);
+    transition: 0.5s;
+    
+}
+.footerBottom{
+    background-color: rgb(133,45,45);
+    padding: 10px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+   
+}   
+
+
+.diseñadores{
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-weight: 400;
+    color: black;
+    font-weight: bold;
+    
+}
+
+.Hurtado{
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    
+
+}

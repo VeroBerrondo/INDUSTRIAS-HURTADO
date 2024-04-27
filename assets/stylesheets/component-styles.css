@@ -1,8 +1,7 @@
 .card {
-    width: 290px;
+    width: 300px;
     height: 400px;
-    background-color: #151515;
+    background-color: #50505001;
     backdrop-filter: blur(20px);
-    border: 1px solid #505050;
-    border-radius: 10px;
+    border: 1px solid purple;
 }
