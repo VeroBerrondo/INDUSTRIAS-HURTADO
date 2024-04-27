@@ -31,7 +31,17 @@
             <div class="card"></div>
         </main>
         <div class="profile__wrapper">
-            <div class="profile__content"></div>
+            <div class="profile__content">
+                <main>
+                    <h2>Corazones en Linea</h2>
+                    <div id="chat">
+                        <div id="mensajes"> </div>
+                        <input type="text" id="mensajeInput" placeholder="Escribe un mensaje aquí..." autofocus>
+                        <button id="enviarBtn">Enviar</button>
+                        <button id="limpiarChat">Limpiar Chat</button>
+                    </div>
+                </main>
+            </div>
         </div>
     </div>
     <script>
@@ -45,5 +55,6 @@
             }
         }
     </script>
+    <script type="module" src="assets/scripts/chat.js"></script>
 </body>
 </html>

@@ -19,7 +19,7 @@ async function iniciarSesion(email, password) {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
     console.log("Usuario autenticado:", user);
-    window.location.href = "chatHeartMate.html";
+    window.location.href = "app/index.html"; /*chatHeartMate.html*/
   } catch (error) {
     console.error("Error al iniciar sesion:", error.message);
     alert("Error al iniciar sesion. Verifica tus credenciales e intenta nuevamente.")
