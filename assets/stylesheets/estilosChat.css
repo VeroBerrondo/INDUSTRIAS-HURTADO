@@ -18,10 +18,10 @@ main {
 
 
 footer {
-    color:white;
+    color: whitesmoke;
     flex-shrink: 0;
     position: absolute;
-    background-color: black;
+    background-color:rgb(36, 3, 3);
     padding: 5px;
     bottom: 0;
     left: 0;
@@ -30,13 +30,13 @@ footer {
 }
 
 header {
-    color:white;
+    color: whitesmoke;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     width: 100%;
-    background-color:black;
+    background-color:rgb(36, 3, 3);
     padding: 5px;
 }
 
@@ -53,16 +53,18 @@ body {
     justify-content: center;
 
 }
+
 @media (max-width: 768px) {
     body {
-        background-position: 50% 50%; 
-        background-size: cover; 
+        background-position: 50% 50%;
+        background-size: cover;
     }
 }
+
 @media (min-width: 769px) {
     body {
-        background-position: 50% 10%; 
-        background-size: cover; 
+        background-position: 50% 10%;
+        background-size: cover;
     }
 }
 
@@ -75,10 +77,11 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
-
+    border-radius: 15px;
 }
+
 @media(max-width:360px) {
-    #chat{
+    #chat {
         width: 100%;
         margin: 0;
         padding: 10px;
@@ -111,7 +114,7 @@ h1 {
     display: flex;
     align-items: center;
     gap: 10px;
-    
+
 }
 
 h2 {
@@ -124,28 +127,30 @@ h2 {
 }
 
 .logo {
-    width: 25px;
+    width: 40px;
     height: auto;
 }
 
 #limpiarChat {
     padding: 10px 20px;
     background-color: rgb(240, 193, 193);
-    color: rgb(61, 59, 59);
+    color: black;
     border: none;
-    border-radius: 5px;
+    border-radius: 15px;
     cursor: pointer;
     margin-top: 10px;
+    opacity: 0.7;
 }
 
 #enviarBtn {
     padding: 10px 20px;
     background-color: rgb(240, 193, 193);
-    color: rgb(61, 59, 59);
+    color: black;
     border: none;
-    border-radius: 5px;
+    border-radius: 15px;
     cursor: pointer;
     margin-top: 10px;
+    opacity: 0.7;
 }
 
 #mensajeInput {
@@ -154,7 +159,7 @@ h2 {
     padding: 10px;
     font-size: 16px;
     border: 2px solid #f689d0;
-    border-radius: 5px;
+    border-radius: 15px;
     box-sizing: border-box;
     opacity: 0.8;
 }

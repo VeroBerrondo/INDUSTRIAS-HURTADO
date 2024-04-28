@@ -6,7 +6,7 @@
 body {
     background-image: url(../imgs/cielo.jpg);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size:cover;
     background-attachment: fixed;
     height: 100%;
     max-width: 100%;
@@ -23,14 +23,14 @@ input:hover {
 }
 
 input[type=text] {
-    border: 2px solid black;
+    border: 2px solid rgb(113, 7, 30);
     border-radius: 6px;
     padding: 5px;
 
 }
 
 input[type=email] {
-    border: 2px solid black;
+    border: 2px solid rgb(113, 7, 30);
     border-radius: 6px;
     padding: 5px;
 
@@ -38,7 +38,7 @@ input[type=email] {
 }
 
 input[type=password] {
-    border: 2px solid black;
+    border: 2px solid rgb(113, 7, 30);
     border-radius: 6px;
     padding: 5px;
 
@@ -47,7 +47,7 @@ input[type=password] {
 }
 
 input[type=date] {
-    border: 2px solid black;
+    border: 2px solid rgb(113, 7, 30);
     border-radius: 6px;
     padding: 5px;
 }
@@ -57,7 +57,7 @@ textarea {
     height: 20%;
     padding: 10px 20px;
     box-sizing: border-box;
-    border: 2px solid black;
+    border: 2px solid rgb(113, 7, 30);
     border-radius: 6px;
     background-color: rgba(237, 198, 82, 0.3);
     resize: none;
@@ -65,23 +65,34 @@ textarea {
 }
 
 input[type=reset] {
-    border: 2px solid black;
+    border: 2px solid rgb(113, 7, 30);
     border-radius: 6px;
     padding: 5px;
 
 }
 
 input[type=submit] {
-    border: 2px solid black;
+    border: 2px solid rgb(113, 7, 30);
     border-radius: 6px;
     padding: 5px;
 }
 
 button {
-    border: 2px solid black;
-    border-radius: 6px;
-    padding: 5px;
+
+    display: inline-block;
+    padding: 7px 15px;
+    font-size: 14px;
     cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: black;
+    background-color: rgb(219, 132, 73);
+    border: none;
+    border-radius: 7px;
+    box-shadow: 0 9px rgb(113, 7, 30);
+
+
 }
 
 .formulario-caja {
@@ -167,11 +178,11 @@ main {
 
 
 footer {
-    color:white;
+    color: whitesmoke;
     flex-shrink: 0;
     position: fixed;
     width: 100%;
-    background-color:black;
+    background-color: rgb(165, 60, 60);
     padding: 5px;
     bottom: 0;
     left: 0;
@@ -180,13 +191,13 @@ footer {
 }
 
 header {
-    color:white;
+    color: whitesmoke;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     width: 100%;
-    background-color: black;
+    background-color: rgb(165, 60, 60);
     padding: 5px;
 
 
@@ -194,7 +205,7 @@ header {
 }
 
 .email-input {
-    background-image: url(../imgs/email-1572-svgrepo-com.svg);
+    background-image: url(../imgs/mail-alt-svgrepo-com.svg);
     background-size: 20px 20px;
     background-position: right center;
     background-repeat: no-repeat;
@@ -203,7 +214,7 @@ header {
 }
 
 .nombre-input {
-    background-image: url(../imgs/personalcard-svgrepo-com.svg);
+    background-image: url(../imgs/personal-center-basic-information-svgrepo-com.svg);
     background-size: 20px 20px;
     background-position: right center;
     background-repeat: no-repeat;
@@ -212,7 +223,7 @@ header {
 }
 
 .apellido-input {
-    background-image: url(../imgs/personalcard-svgrepo-com.svg);
+    background-image: url(../imgs/personal-center-basic-information-svgrepo-com.svg);
     background-size: 20px 20px;
     background-position: right center;
     background-repeat: no-repeat;
@@ -221,7 +232,7 @@ header {
 }
 
 .usuario-input {
-    background-image: url(../imgs/user-silhouette-svgrepo-com.svg);
+    background-image: url(../imgs/user-heart-svgrepo-com.svg);
     background-size: 20px 20px;
     background-position: right center;
     background-repeat: no-repeat;
@@ -229,7 +240,7 @@ header {
 }
 
 .ciudad-input {
-    background-image: url(../imgs/city_building_construction_cities_buildings_icon_133122.svg);
+    background-image: url(../imgs/city-transit-svgrepo-com.svg);
     background-size: 20px 20px;
     background-position: right center;
     background-repeat: no-repeat;
@@ -238,7 +249,7 @@ header {
 
 
 .contrasena {
-    background-image: url(..//imgs/password-protection-privacy-access-verification-code-svgrepo-com.svg);
+    background-image: url(..//imgs/password-svgrepo-com.svg);
     background-size: 20px 20px;
     background-position: right center;
     background-repeat: no-repeat;
@@ -254,9 +265,10 @@ h1 {
 }
 
 .logo {
-    height: 25px;
+    height: 40px;
     width: auto;
-    margin-right: 10px;
+
+
 
 }
 
@@ -267,7 +279,8 @@ h1 {
     margin-right: 5px;
 
 }
-a{
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
-  color: black; 
+
+a {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: black;
 }
