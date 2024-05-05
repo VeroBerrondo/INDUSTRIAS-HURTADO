@@ -80,6 +80,7 @@ window.savePreferences = async function savePreferences() {
 
     // Guarda las preferencias del usuario en Firestore
     await setDoc(doc(db, "preferencias", userId), {
+      
       pais: pais,
       ciudad: ciudad,
       genero: generoSeleccionado,
