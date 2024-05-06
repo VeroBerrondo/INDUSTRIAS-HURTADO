@@ -62,6 +62,7 @@ onSnapshot(messagesQuery, (snapshot) => {
             const messageWrapper = document.createElement('div');
             const messageLabel = document.createElement('p');
             const messageDateTime = document.createElement('span');
+            const messageUser = document.createElement('span');
 
             let fecha;
 
@@ -79,8 +80,10 @@ onSnapshot(messagesQuery, (snapshot) => {
 
             messageWrapper.classList.add("message");
             messageLabel.textContent = messageData.content;
+            messageUser.textContent = messageData.user;
             messageDateTime.textContent = `${getMonthName(mes)} ${dia.toString().padStart(2, '0')} de ${año} ${hora.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`;
             messagesContainer.appendChild(messageWrapper);
+            messageWrapper.appendChild(messageUser);
             messageWrapper.appendChild(messageLabel);
             messageWrapper.appendChild(messageDateTime);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
