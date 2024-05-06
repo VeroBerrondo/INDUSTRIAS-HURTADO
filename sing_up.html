@@ -20,9 +20,12 @@
         <div class="form__wrapper visible">
             <form onSubmit="event.preventDefault(),register()">
                 <h2>Crear una cuenta</h2>
-                <div class="form__big-row">
+                <div class="form__entry">
                     <label for="usuario">Usuario</label>
-                    <input type="text" id="usuario" name="usuario" class="usuario-input" placeholder="Crea un usuario" required><br>
+                    <input type="text" id="usuario" name="usuario" class="usuario-input" placeholder="Crea un usuario" required>
+                    <svg class="icon">
+                        <use xlink:href="../assets/icons/svg-resources.xml#icon-person"></use>
+                    </svg>
                 </div>
                 <div class="form__double-row">
                     <label for="nombre">Nombre:</label>

@@ -1,6 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js';
 import { getAuth } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js';
-import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js';
+import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, getDoc, doc } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js';
 
 // Configuración de Firebase
 const firebaseConfig = {
@@ -17,6 +17,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+
+//  obtener el nombre de usuario
+async function getUserData(userId) {
+    try {
+        const userDoc = await getDoc(doc(db, "users", userId));
+        if (userDoc.exists()) {
+            return userDoc.data();
+        } else {
+            console.error("No se encontró el usuario en Firestore");
+            return "¿?";
+        }
+    } catch (error) {
+        console.error("Error al obtener el nombre de usuario:", error);
+        return {usuario: "Error en usuario"}
+    }
+}
 
 // Enviar mensaje a Firestore
 async function sendMessage(message) {
@@ -56,9 +72,10 @@ function getMonthName(mes) {
 const messagesQuery = query(collection(db, "mensajes"), orderBy("timestamp"));
 onSnapshot(messagesQuery, (snapshot) => {
     const messagesContainer = document.getElementById('mensajes');
-    snapshot.docChanges().forEach((change) => {
+    snapshot.docChanges().forEach(async (change) => {
         if (change.type === "added") {
             const messageData = change.doc.data();
+            const userData = await getUserData(messageData.user);
             const messageWrapper = document.createElement('div');
             const messageLabel = document.createElement('p');
             const messageDateTime = document.createElement('span');
@@ -80,7 +97,7 @@ onSnapshot(messagesQuery, (snapshot) => {
 
             messageWrapper.classList.add("message");
             messageLabel.textContent = messageData.content;
-            messageUser.textContent = messageData.user;
+            messageUser.textContent = userData.usuario;
             messageDateTime.textContent = `${getMonthName(mes)} ${dia.toString().padStart(2, '0')} de ${año} ${hora.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`;
             messagesContainer.appendChild(messageWrapper);
             messageWrapper.appendChild(messageUser);

@@ -271,6 +271,20 @@ main {
     justify-content: center;
 }
 
+.form__entry {
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    label {
+        text-align: start;
+    }
+    input {
+        background-color: transparent;
+        border: 1px solid red;
+        outline: 0;
+    }
+}
+
 .form__wrapper {
     h2 {
         font-size: 40px;
