@@ -1,5 +1,7 @@
 :root{
     --color-black_1: #151515;
+    --accent-color: #2FAAF4;
+    --accent-gradient: linear-gradient(to top, var(--accent-color), #3D7CD2);;
 }
 
 .bg__wrapper {
@@ -28,6 +30,27 @@
         height: 35px;
         border-radius: 50%;
     }
+    &.send {
+        background-color: var(--accent-color);
+        height: 40px;
+        border: 0;
+        border-radius: 50%;
+        width: 40px;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        padding: 8px;
+        margin: 5px;
+        color: beige;
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}
+
+.icon {
+    aspect-ratio: 1/1;
+    fill: currentColor;
 }
 
 .navigation__wrapper {
@@ -105,18 +128,58 @@
             border-radius: 5px;
             height: 100%;
             background-color: #303030;
+            .message {
+                background-image: var(--accent-gradient);
+                display: flex;
+                flex-direction: column;
+                width: fit-content;
+                position: relative;
+                padding: 15px;
+                margin: 15px;
+                row-gap: 5px;
+                border-radius: 20px 20px 20px 0px;
+                &::after {
+                    content:"";
+                    position: absolute;
+                    display: flex;
+                    height: 0;
+                    width: 0;
+                    bottom: -10px;
+                    left: 0;
+                    border-top: 10px solid transparent;
+                    border-bottom: 10px solid transparent;
+                    border-right: 10px solid transparent;
+                    border-left: 10px solid var(--accent-color);
+                }
+                p {
+                    color: beige;
+                    margin: 0;
+                    padding: 0;
+                }
+                span {
+                    font-size: 12px;
+                    color: darkslateblue;
+                }
+            }
         }
         .chatter__wrapper {
             display: grid;
-            grid-template-columns: 3fr 1fr;
+            grid-template-columns: 1fr auto;
+            background-color: #202020;
+            border-radius: 20px;
             column-gap: 10px;
             width: 100%;
             height: max-content;
             input {
-                height: 25px;
-                border-radius: 10px;
+                height: 30px;
                 border: 0;
                 padding: 5px;
+                background-color: transparent;
+                color: white;
+                outline: 0;
+                margin-left: 5px;
+                margin-top: auto;
+                margin-bottom: auto;
             }
         }
     }

@@ -1,4 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js';
+import { getAuth } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js';
 import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js';
 
 // Configuración de Firebase
@@ -15,14 +16,16 @@ const firebaseConfig = {
 // Inicializar Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
 // Enviar mensaje a Firestore
 async function sendMessage(message) {
     if (message.trim() === "") return;
     try {
         await addDoc(collection(db, "mensajes"), {
-            texto: message,
-            timestamp: serverTimestamp()
+            content: message,
+            timestamp: serverTimestamp(),
+            user: auth.currentUser.uid
         });
         document.getElementById('mensajeInput').value = '';  // Limpiar el input
     } catch (error) {
@@ -43,6 +46,12 @@ document.getElementById('mensajeInput').addEventListener('keypress', (event) => 
     }
 });
 
+// Aux para fechas
+function getMonthName(mes) {
+    const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    return meses[mes - 1];
+}
+
 // Escuchar nuevos mensajes desde Firestore
 const messagesQuery = query(collection(db, "mensajes"), orderBy("timestamp"));
 onSnapshot(messagesQuery, (snapshot) => {
@@ -50,10 +59,30 @@ onSnapshot(messagesQuery, (snapshot) => {
     snapshot.docChanges().forEach((change) => {
         if (change.type === "added") {
             const messageData = change.doc.data();
-            const messageElement = document.createElement('div');
-            messageElement.textContent = messageData.texto;
-            messageElement.classList.add("message");
-            messagesContainer.appendChild(messageElement);
+            const messageWrapper = document.createElement('div');
+            const messageLabel = document.createElement('p');
+            const messageDateTime = document.createElement('span');
+
+            let fecha;
+
+            if (messageData.timestamp == null) {
+                fecha = new Date();
+            } else {
+                fecha = new Date(messageData.timestamp.seconds*1000);
+            }
+
+            const dia = fecha.getDate();
+            const mes = fecha.getMonth() + 1;
+            const año = fecha.getFullYear();
+            const hora = fecha.getHours();
+            const minutos = fecha.getMinutes();
+
+            messageWrapper.classList.add("message");
+            messageLabel.textContent = messageData.content;
+            messageDateTime.textContent = `${getMonthName(mes)} ${dia.toString().padStart(2, '0')} de ${año} ${hora.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`;
+            messagesContainer.appendChild(messageWrapper);
+            messageWrapper.appendChild(messageLabel);
+            messageWrapper.appendChild(messageDateTime);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
     });
