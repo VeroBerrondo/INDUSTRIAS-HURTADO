@@ -4,7 +4,6 @@
 }
 
 body {
-    background-image: url(../imgs/cielo.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -16,7 +15,13 @@ body {
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    background-color: #1f1f1f;
 }
+
+
+
+
+
 
 input:hover {
     cursor: pointer;
@@ -145,54 +150,13 @@ button {
     bottom: 0;
     left: 0;
     overflow: hidden;
-
     img {
         height: 100%;
-        opacity: 0.4;
     }
 }
 
-main {
-
-    top: 50px;
-    left: 0;
-    right: 0;
-    bottom: 50px;
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-
-footer {
-    flex-shrink: 0;
-    position: fixed;
-    width: 100%;
-    background-color: rgb(236, 180, 60);
-    padding: 5px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-}
-
-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    background-color: rgb(236, 180, 60);
-    padding: 5px;
-
-
-
-}
-
 .email-input {
-    background-image: url(../imgs/email-1572-svgrepo-com.svg);
+    background-image: url(../imgs/mail-alt-svgrepo-com.svg);
     background-size: 20px 20px;
     background-position: right center;
     background-repeat: no-repeat;
@@ -219,7 +183,7 @@ header {
 }
 
 .usuario-input {
-    background-image: url(../imgs/user-silhouette-svgrepo-com.svg);
+    background-image: url(../imgs/user-heart-svgrepo-com.svg);
     background-size: 20px 20px;
     background-position: right center;
     background-repeat: no-repeat;
@@ -236,7 +200,7 @@ header {
 
 
 .contrasena {
-    background-image: url(..//imgs/password-protection-privacy-access-verification-code-svgrepo-com.svg);
+    background-image: url(../imgs/password-svgrepo-com.svg);
     background-size: 20px 20px;
     background-position: right center;
     background-repeat: no-repeat;
@@ -268,4 +232,51 @@ h1 {
 a{
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
   color: black; 
+}
+
+/* Walther estuvo aqui... */
+
+footer {
+    flex-shrink: 0;
+    position: fixed;
+    width: 100%;
+    background-color: rgb(236, 180, 60);
+    padding: 5px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    background-color: rgb(236, 180, 60);
+    padding: 5px;
+    height: 40px;
+}
+
+main {
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.form__wrapper {
+    h2 {
+        font-size: 40px;
+        font-weight: 800;
+    }
+    border: 1px solid white;
+    height: 90%;
+    margin: 2%;
 }
