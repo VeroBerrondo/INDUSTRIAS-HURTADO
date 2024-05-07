@@ -3,19 +3,34 @@
     padding: 0;
 }
 
+body {
+    background-image: url(../imgs/cielo.jpg);
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-attachment: fixed;
+    height: 100%;
+    max-width: 100%;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
 input:hover {
     cursor: pointer;
 }
 
 input[type=text] {
-    border: 4px solid rgb(236, 180, 60);
+    border: 2px solid rgb(113, 7, 30);
     border-radius: 6px;
     padding: 5px;
 
 }
 
 input[type=email] {
-    border: 4px solid rgb(236, 180, 60);
+    border: 2px solid rgb(113, 7, 30);
     border-radius: 6px;
     padding: 5px;
 
@@ -23,7 +38,7 @@ input[type=email] {
 }
 
 input[type=password] {
-    border: 4px solid rgb(236, 180, 60);
+    border: 2px solid rgb(113, 7, 30);
     border-radius: 6px;
     padding: 5px;
 
@@ -32,7 +47,7 @@ input[type=password] {
 }
 
 input[type=date] {
-    border: 4px solid rgb(236, 180, 60);
+    border: 2px solid rgb(113, 7, 30);
     border-radius: 6px;
     padding: 5px;
 }
@@ -42,31 +57,42 @@ textarea {
     height: 20%;
     padding: 10px 20px;
     box-sizing: border-box;
-    border: 2px solid rgb(236, 180, 60);
+    border: 2px solid rgb(113, 7, 30);
     border-radius: 6px;
-    background-color: rgba(242, 228, 150, 0.5);
+    background-color: rgba(237, 198, 82, 0.3);
     resize: none;
     cursor: pointer;
 }
 
 input[type=reset] {
-    border: 4px solid rgb(236, 180, 60);
+    border: 2px solid rgb(113, 7, 30);
     border-radius: 6px;
     padding: 5px;
 
 }
 
 input[type=submit] {
-    border: 4px solid rgb(236, 180, 60);
+    border: 2px solid rgb(113, 7, 30);
     border-radius: 6px;
     padding: 5px;
 }
 
 button {
-    border: 4px solid rgb(236, 180, 60);
-    border-radius: 6px;
-    padding: 5px;
+
+    display: inline-block;
+    padding: 7px 15px;
+    font-size: 14px;
     cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: black;
+    background-color: rgb(219, 132, 73);
+    border: none;
+    border-radius: 7px;
+    box-shadow: 0 9px rgb(113, 7, 30);
+
+
 }
 
 .formulario-caja {
@@ -78,8 +104,8 @@ button {
     max-width: 100%;
     top: 50%;
     left: 50%;
-
-
+   
+    
     &.visible {
         display: block;
 
@@ -130,9 +156,52 @@ button {
     bottom: 0;
     left: 0;
     overflow: hidden;
+
     img {
         height: 100%;
+        opacity: 0.4;
     }
+}
+
+main {
+
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+footer {
+    color: whitesmoke;
+    flex-shrink: 0;
+    position: fixed;
+    width: 100%;
+    background-color: rgb(165, 60, 60);
+    padding: 5px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+}
+
+header {
+    color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    background-color: rgb(165, 60, 60);
+    padding: 5px;
+
+
+
 }
 
 .email-input {
@@ -145,7 +214,7 @@ button {
 }
 
 .nombre-input {
-    background-image: url(../imgs/personalcard-svgrepo-com.svg);
+    background-image: url(../imgs/personal-center-basic-information-svgrepo-com.svg);
     background-size: 20px 20px;
     background-position: right center;
     background-repeat: no-repeat;
@@ -154,7 +223,7 @@ button {
 }
 
 .apellido-input {
-    background-image: url(../imgs/personalcard-svgrepo-com.svg);
+    background-image: url(../imgs/personal-center-basic-information-svgrepo-com.svg);
     background-size: 20px 20px;
     background-position: right center;
     background-repeat: no-repeat;
@@ -171,7 +240,7 @@ button {
 }
 
 .ciudad-input {
-    background-image: url(../imgs/city_building_construction_cities_buildings_icon_133122.svg);
+    background-image: url(../imgs/city-transit-svgrepo-com.svg);
     background-size: 20px 20px;
     background-position: right center;
     background-repeat: no-repeat;
@@ -180,7 +249,7 @@ button {
 
 
 .contrasena {
-    background-image: url(../imgs/password-svgrepo-com.svg);
+    background-image: url(..//imgs/password-svgrepo-com.svg);
     background-size: 20px 20px;
     background-position: right center;
     background-repeat: no-repeat;
@@ -196,9 +265,10 @@ h1 {
 }
 
 .logo {
-    height: 25px;
+    height: 40px;
     width: auto;
-    margin-right: 10px;
+
+
 
 }
 
@@ -209,107 +279,10 @@ h1 {
     margin-right: 5px;
 
 }
+
 a{
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; 
-  color: black; 
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: black;
+    text-decoration: none;
 }
-
-/* Walther estuvo aqui... */
-
-footer {
-    flex-shrink: 0;
-    position: fixed;
-    width: 100%;
-    background-color: rgb(236, 180, 60);
-    padding: 5px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 40px;
-}
-
-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    background-color: rgb(236, 180, 60);
-    padding: 5px;
-    height: 40px;
-}
-
-main {
-    top: 50px;
-    left: 0;
-    right: 0;
-    bottom: 50px;
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
-}
-
-body {
-    height: 100%;
-    max-width: 100%;
-    text-align: center;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    background-color: #1a1a1a;
-}
-
-.form__entry {
-    cursor: pointer;
-    padding: 10px 20px;
-    border-radius: 20px;
-    background-color: #2a2a2a;
-    margin: 5px;
-    display: grid;
-    grid-template-columns: auto min-content;
-    grid-template-rows: auto auto;
-    color: beige;
-    &:focus-within {
-        outline: 2px solid #1A8AEC;
-        label:not([name="icon"]) {
-            color: #1A8AEC;
-        }
-    }
-    label {
-        text-align: start;
-        grid-row: 1/1;
-        grid-column: 1/2;
-        font-size: 12px;
-    }
-    input {
-        color: inherit;
-        font-size: 18px;
-        background-color: transparent;
-        border: 0;
-        outline: 0;
-        grid-row: 2/2;
-        grid-column: 1/1;
-    }
-    label[name="icon"] {
-        margin-top: auto;
-        margin-bottom: auto;
-        aspect-ratio: 1/1;
-        height: 30px;
-        grid-row: 2/2;
-        grid-column: 2/2;
-    }
-}
-
-.form__wrapper {
-    h2 {
-        font-size: 40px;
-        font-weight: 800;
-    }
-    border: 1px solid white;
-    height: 90%;
-    margin: 2%;
-}
+    
