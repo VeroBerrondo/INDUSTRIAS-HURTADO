@@ -415,6 +415,39 @@ body {
 
 }
 
+@media screen and (max-width:900px) {
+    .items {
+        grid-gap: 30px
+
+    }
+
+
+    .textos-inicio, .img-pareja{
+        grid-column: 1/-1;
+        text-align: center;
+    }
+
+    .textos-inicio{
+        padding: 15px;
+    }
+
+    .instruccionesFondo{
+        height: auto;
+        margin-top: 40px;
+    }
+
+    .item{
+        width: 80%;
+        height: auto;
+    }
+
+  
+  
+
+
+    
+}
+
 /* Puntos */
 
 .puntos {
@@ -444,12 +477,13 @@ body {
     display: flex;
     align-items: center;
     text-align: center;
-    width: 22%;
+    width: 15%;
 
 }
 
 .corazon {
-    height: 70px;
+    height: 50px;
+   
 }
 
 @media (max-width:800px) {
