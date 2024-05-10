@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/imgs/logocorazon.ico" />
+    <title>HeartMate</title>
+    <link rel="stylesheet" href="../assets/stylesheets/main_styles.css">
+    <link rel="stylesheet" href="../assets/stylesheets/app_styles.css">
+</head>
+<body>
+    <div class="app__mount">
+        <div class="nav-bar_mobile__wrapper">
+            <button class="button iconed contrast tool" onclick="sideMenu_toggle()">
+                <svg class="icon">
+                    <use xlink:href="../assets/icons/svg-resources.xml#icon-dot-menu"></use>
+                </svg>
+            </button>
+            <label class="entry simple" for="search-chats">
+                <label for="search-chats">
+                    <svg class="icon">
+                        <use xlink:href="../assets/icons/svg-resources.xml#icon-search"></use>
+                    </svg>
+                </label>
+                <input type="text" id="search-chats" placeholder="Buscar...">
+            </label>
+            <nav class="menu__content">
+                <div class="outer-area" onclick="sideMenu_toggle()"></div>
+                <a class="button iconed contrast option back" onclick="sideMenu_toggle()">
+                    <svg class="icon">
+                        <use xlink:href="../assets/icons/svg-resources.xml#icon-arrow"></use>
+                    </svg>
+                    <p>Regresar</p>
+                </a>
+                <a class="button iconed contrast option" href="./feed.html">
+                    <svg class="icon">
+                        <use xlink:href="../assets/icons/svg-resources.xml#icon-feed"></use>
+                    </svg>
+                    <p>Feed</p>
+                </a>
+                <a class="button iconed contrast option" href="./profile.html">
+                    <svg class="icon">
+                        <use xlink:href="../assets/icons/svg-resources.xml#icon-profile"></use>
+                    </svg>
+                    <p>Perfil</p>
+                </a>
+                <a class="button iconed contrast option" href="./chat.html" class="current">
+                    <svg class="icon">
+                        <use xlink:href="../assets/icons/svg-resources.xml#icon-chat-heart-filled"></use>
+                    </svg>
+                    <p>Chat</p>
+                </a>
+                <a class="button iconed contrast option" href="./notifications.html">
+                    <svg class="icon">
+                        <use xlink:href="../assets/icons/svg-resources.xml#icon-bell"></use>
+                    </svg>
+                    <p>Notificaciones</p>
+                </a>
+                <a class="button iconed contrast option" href="./config.html">
+                    <svg class="icon">
+                        <use xlink:href="../assets/icons/svg-resources.xml#icon-gear"></use>
+                    </svg>
+                    <p>Configuracion</p>
+                </a>
+            </nav> 
+        </div>
+        <div class="nav-bar_desktop__wrapper">
+            <nav>
+                <a class="button iconed" href="./feed.html">
+                    <svg class="icon">
+                        <use xlink:href="../assets/icons/svg-resources.xml#icon-feed"></use>
+                    </svg>
+                </a>
+                <a class="button iconed" href="./profile.html">
+                    <svg class="icon">
+                        <use xlink:href="../assets/icons/svg-resources.xml#icon-profile"></use>
+                    </svg>
+                </a>
+                <a class="button iconed current" href="./chat.html" class="current">
+                    <svg class="icon">
+                        <use xlink:href="../assets/icons/svg-resources.xml#icon-chat-heart-filled"></use>
+                    </svg>
+                </a>
+                <a class="button iconed" href="./notifications.html">
+                    <svg class="icon">
+                        <use xlink:href="../assets/icons/svg-resources.xml#icon-bell"></use>
+                    </svg>
+                </a>
+                <a class="button iconed" href="./config.html">
+                    <svg class="icon">
+                        <use xlink:href="../assets/icons/svg-resources.xml#icon-gear"></use>
+                    </svg>
+                </a>
+            </nav>    
+        </div>
+        <main class="chat__wrapper">
+            <div class="chat-list__wrapper" onclick="currentChat_toggle()">
+                <div class="chat-list__header">
+                    <label class="entry simple" for="search-chats">
+                        <label for="search-chats">
+                            <svg class="icon">
+                                <use xlink:href="../assets/icons/svg-resources.xml#icon-search"></use>
+                            </svg>
+                        </label>
+                        <input type="text" id="search-chats" placeholder="Buscar...">
+                    </label>
+                </div>
+                <div class="chat-preview-card__wrapper current">
+                    <div class="user__avatar">
+                        <img src="../assets/imgs/Global-avatar.svg" alt="">
+                    </div>
+                    <div class="chat-card__content">
+                        <div class="chat-card__header">
+                            <p>Chat Global</p>
+                            <span>12:00</span>
+                        </div>
+                        <div class="chat-card__last-msg">
+                            <p>Hello world</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-preview-card__wrapper">
+                    <div class="user__avatar">
+                        <img src="../assets/imgs/sample-avatar.svg" alt="">
+                    </div>
+                    <div class="chat-card__content">
+                        <div class="chat-card__header">
+                            <p>Fulano de tal</p>
+                            <span>12:00</span>
+                        </div>
+                        <div class="chat-card__last-msg">
+                            <p>Hello world</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-preview-card__wrapper">
+                    <div class="user__avatar">
+                        <img src="../assets/imgs/sample-avatar.svg" alt="">
+                    </div>
+                    <div class="chat-card__content">
+                        <div class="chat-card__header">
+                            <p>Fulano de tal</p>
+                            <span>12:00</span>
+                        </div>
+                        <div class="chat-card__last-msg">
+                            <p>Hello world</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="current-msg__wrapper" id="chat">
+                <div class="main-panel__wrapper">
+                    <div class="main-panel__content">
+                        <div class="chat-mobile__header">
+                            <button class="button iconed contrast tool back" onclick="currentChat_toggle()">
+                                <svg class="icon">
+                                    <use xlink:href="../assets/icons/svg-resources.xml#icon-arrow"></use>
+                                </svg>
+                            </button>
+                            <img src="../assets/imgs/Global-avatar.svg" alt="">
+                            <button name="sidePanel_btn" class="button iconed contrast tool" onclick="sidePanel_toggle(this)">
+                                <svg class="icon">
+                                    <use xlink:href="../assets/icons/svg-resources.xml#icon-dot-menu"></use>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="chat-desktop__header">
+                            <div class="header__wrapper">
+                                <img src="../assets/imgs/Global-avatar.svg" alt="">
+                                <p>Chat Global</p>
+                            </div>
+                            <div class="tools__wrapper">
+                                <button class="button iconed contrast tool" onclick="sidePanel_toggle(this)">
+                                    <svg class="icon">
+                                        <use xlink:href="../assets/icons/svg-resources.xml#icon-dot-menu"></use>
+                                    </svg>
+                                </button>
+                                <button class="button iconed contrast tool" onclick="">
+                                    <svg class="icon">
+                                        <use xlink:href="../assets/icons/svg-resources.xml#icon-search"></use>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="chat__body">
+                            <div class="message__wrapper" id="mensajes">
+                            </div>
+                            <div class="chatter__wrapper">
+                                <label for="mensajeInput" class="chatter__entry">
+                                    <button class="button emogy" id="emogy-btn">
+                                        <svg class="icon">
+                                            <use xlink:href="../assets/icons/svg-resources.xml#icon-kiss"></use>
+                                        </svg>
+                                    </button>
+                                    <input type="text" id="mensajeInput" placeholder="Escribe un mensaje aquí..." autofocus>
+                                </label>
+                                <button class="button send" id="enviarBtn">
+                                    <svg class="icon">
+                                        <use xlink:href="../assets/icons/svg-resources.xml#icon-send"></use>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-panel__wrapper">
+                    <div class="info-panel__content">
+                        <div class="chat-info__wrapper"></div>
+                        <div class="chat-tools__wrapper">
+                            <button id="limpiarChat">Limpiar Chat</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../assets/scripts/design_module.js"></script>
+    <script type="module" src="../assets/scripts/chat_systems.js"></script>
+</body>
+</html>

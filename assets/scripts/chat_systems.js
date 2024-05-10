@@ -18,20 +18,20 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-//  obtener el nombre de usuario
-async function getUserData(userId) {
-    try {
-        const userDoc = await getDoc(doc(db, "users", userId));
+function getUserData(userId) {
+    const userDocPromise = getDoc(doc(db, "users", userId));
+
+    return userDocPromise.then((userDoc) => {
         if (userDoc.exists()) {
             return userDoc.data();
         } else {
             console.error("No se encontró el usuario en Firestore");
             return "¿?";
         }
-    } catch (error) {
+    }).catch((error) => {
         console.error("Error al obtener el nombre de usuario:", error);
-        return {usuario: "Error en usuario"}
-    }
+        return { usuario: "Error en usuario" };
+    });
 }
 
 // Enviar mensaje a Firestore
@@ -70,16 +70,21 @@ function getMonthName(mes) {
 
 // Escuchar nuevos mensajes desde Firestore
 const messagesQuery = query(collection(db, "mensajes"), orderBy("timestamp"));
+
 onSnapshot(messagesQuery, (snapshot) => {
     const messagesContainer = document.getElementById('mensajes');
-    snapshot.docChanges().forEach(async (change) => {
+    snapshot.docChanges().forEach((change) => {
         if (change.type === "added") {
             const messageData = change.doc.data();
-            const userData = await getUserData(messageData.user);
-            const messageWrapper = document.createElement('div');
-            const messageLabel = document.createElement('p');
-            const messageDateTime = document.createElement('span');
-            const messageUser = document.createElement('span');
+
+            const messageWrapper = document.createElement('div'); //Envoltorio de todo el mensaje
+            const messageLeftWrapper = document.createElement('div'); //Envoltorio izquierdo
+            const messageRightWrapper = document.createElement('div');
+            const messageLabel = document.createElement('p'); //Contenido del mensaje
+            const messageDateTime = document.createElement('span'); //Hora del mensaje
+            const messageUser = document.createElement('span');//Usuario del mensaje
+            const messageImageWrapper = document.createElement('div');//Envoltorio de imagen
+            const messageImage = document.createElement('img');//imagen
 
             let fecha;
 
@@ -95,14 +100,48 @@ onSnapshot(messagesQuery, (snapshot) => {
             const hora = fecha.getHours();
             const minutos = fecha.getMinutes();
 
+            messageLeftWrapper.classList.add("message__left-section");
+            messageRightWrapper.classList.add("message__right-section");
             messageWrapper.classList.add("message");
-            messageLabel.textContent = messageData.content;
-            messageUser.textContent = userData.usuario;
+            
+            try {
+                if (messageData.user == auth.currentUser.uid) {
+                    messageWrapper.classList.add("self-msg");
+                }
+            } catch {
+                console.log("error al identificar el auth.currentUser")
+            }
+
+            messageImageWrapper.classList.add("avatar");
+            messageLabel.classList.add("content");
+            messageUser.classList.add("user");
+            messageDateTime.classList.add("time");
+
+            messageLabel.innerHTML = messageData.content;
+            
+            getUserData(messageData.user).then((userData) => {
+                messageUser.textContent = userData.usuario;
+                if (userData.profile) {
+                    messageImage.src = userData.profile;
+                } else {
+                    messageImage.src = "http://cache0.bigcartel.com/product_images/45752467/envelope.jpg"
+                }
+            }).catch((error) => {
+                // Manejo de errores si getUserData() falla
+                console.error(error);
+            });
+
             messageDateTime.textContent = `${getMonthName(mes)} ${dia.toString().padStart(2, '0')} de ${año} ${hora.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`;
+            
             messagesContainer.appendChild(messageWrapper);
-            messageWrapper.appendChild(messageUser);
-            messageWrapper.appendChild(messageLabel);
-            messageWrapper.appendChild(messageDateTime);
+            messageWrapper.appendChild(messageLeftWrapper);
+            messageWrapper.appendChild(messageRightWrapper)
+
+            messageLeftWrapper.appendChild(messageImageWrapper);
+            messageImageWrapper.appendChild(messageImage);
+            messageRightWrapper.appendChild(messageUser);
+            messageRightWrapper.appendChild(messageLabel);
+            messageRightWrapper.appendChild(messageDateTime);
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
     });
