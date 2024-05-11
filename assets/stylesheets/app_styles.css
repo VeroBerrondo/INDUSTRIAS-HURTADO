@@ -8,8 +8,9 @@
     display: flex;
     flex-direction: row;
     background-color: var(--color_red-1);
-    .chat__wrapper {
+    .app__wrapper {
         display: flex;
+        background-color: rebeccapurple;
         .chat-list__wrapper {
             width: 100%;
             height: 100%;
@@ -329,7 +330,7 @@
                 }
             }
         }
-        .chat__wrapper {
+        .app__wrapper {
             /* Chat App Mobile */
             border-radius: 50px 50px 0 0;
             top: 10%;
@@ -437,15 +438,15 @@
             height: 100%;
             border: 1px solid red;
         }
-        .chat__wrapper {
+        .app__wrapper {
+            border-radius: 50px 0 0 50px;
             flex-direction: row;
             width: 100%;
             height: 97vh;
-            padding: 1.5vh;
-            overflow-x: hidden;
+            margin: 1.5vh;
+            overflow: hidden;
             .chat-list__wrapper {
                 flex: 0.5;
-                border-radius: 50px 0 0 50px;
                 .chat-list__header {
                     height: 7%;
                     display: flex;
