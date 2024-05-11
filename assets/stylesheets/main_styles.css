@@ -1,0 +1,185 @@
+:root {
+    /*- Colors -*/
+    --color_red-1: #71071E;
+    --color_red-2: #410411;
+    --color_orange-1: #DB8449;
+    --color_black-1: #1a1a1a;
+    --color_black-2: #151515;
+    --color_black-3: #252525;
+    --color_gray-1: #4d4d4d;
+    --color_blue-1: #2FAAF4;
+    --color_beige-1: #F5F5DC;
+    --color_blue-2: #075371;
+    --color_gray-2: #adadad;
+    --color_white-1: #ECECEC;
+    --color_white-2: #fafafa;
+    --color_white-3: #DCDCDC;
+    --color_pink-1: #FAD4D4;
+    --color_pink-2: #EF9F9F;
+    --color_pink-3: #F47C7C;
+    /*- Linear Gradients -*/
+    --color_gradient_blue-blue-1: linear-gradient(to top, var(--color-blue-1), #3D7CD2);
+    --color_gradient_blue-cyan-1: linear-gradient(90deg, rgba(5,0,35,1) 0%, rgba(10,10,120,1) 35%, rgba(0,210,250,1) 100%);
+}
+
+@font-face {
+    font-family: 'Manrope';
+    src: url('../fonts/Manrope-Regular.ttf');
+    /* ExtraLight = font-weight: 200; */
+    /* Light = font-weight: 300; */
+    /* Regular = font-weight: 400; */
+    /* Medium = font-weight: 500; */
+    /* SemiBold = font-weight: 600 */
+    /* Bold = font-weight: 700 */
+    /* ExtraBold = font-weight: 800 */
+}
+
+.app__mount {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    vertical-align: initial;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: 'manrope';
+}
+
+.button {
+    &.tool {
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        height: 100%;
+        &.active {
+            background-color: var(--color_pink-3);
+        }
+    }
+    &.back {
+        .icon {
+            transform: rotateY(180deg);
+        }
+    }
+    &.send, &.emogy {
+        background-color: var(--color_red-1);
+        height: 40px;
+        border: 0;
+        border-radius: 50%;
+        width: 40px;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        padding: 8px;
+        margin: 5px;
+        color: var(--color_beige-1);
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+    &.emogy {
+        background-color: transparent;
+    }
+    &.iconed {
+        border: 0;
+        border-radius: 50%;
+        aspect-ratio: 1/1;
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &.option {
+            border-radius: 25px;
+            justify-content: flex-start;
+            &:hover, &:active, &:focus {
+                background-color: var(--color_pink-3);
+                &.contrast .icon {
+                    color: var(--color_beige-1);
+                }
+                &.contrast.tool .icon {
+                    color: var(--color_pink-3);
+                }
+                .icon {
+                    fill:currentColor;
+                    stroke: none;
+                    stroke-width: 0;
+                }
+            }
+        }
+        .icon {
+            width: 60%;
+            color: var(--color_beige-1);
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2px;
+        }
+        &.contrast {
+            .icon {
+                color: var(--color_pink-3);
+            }
+        }
+        &.tool { 
+            .icon {
+                width: auto;
+                height: 100%;
+            }
+            &.current {
+                background-color: transparent;
+            }
+            
+        }
+        &.current {
+            background-color: var(--color_pink-3);
+            &.contrast .icon {
+                color: var(--color_beige-1);
+            }
+            &.contrast.tool .icon {
+                color: var(--color_pink-3);
+            }
+            .icon {
+                fill:currentColor;
+                stroke: none;
+                stroke-width: 0;
+            }
+        }
+    }
+}
+
+.entry {
+    &.simple {
+        background-color: var(--color_pink-2);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 65%;
+        width: 65%;
+        padding: 1.5%;
+        border-radius: 10px;
+        &:focus-within {
+            outline: 2px solid red;
+        }
+        label {
+            height: 100%;
+            aspect-ratio: 1/1;
+            color: var(--color_beige-1);
+            .icon {
+                height: 100%;
+                fill: none;
+                stroke: currentColor;
+            }
+        }
+        input {
+            color: black;
+            font-size: 18px;
+            background-color: transparent;
+            border: 0;
+            outline: 0;
+        }
+    }
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1/1;
+    fill: currentColor;
+    min-width: 14px;
+}

@@ -30,7 +30,7 @@ input:hover {
     color: white;
     width: 50vw;
     height: 100vw;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(10px);
     border-radius: 40px;
     border: 3px solid rgba(255, 255, 255, 0.3);
@@ -149,8 +149,7 @@ h1 {
     font-family: cursive;
     display: flex;
     align-items: center;
-    margin: 0;
-    gap: 10px;
+    padding: 20px 0;
 }
 
 .logo {
@@ -167,6 +166,9 @@ h1 {
     margin-right: 5px;
 
 }
-
+textarea{
+    color: #fff;
+    background-color: transparent;
+}
 
     

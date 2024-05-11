@@ -37,7 +37,7 @@ window.register = async function register() {
       nombre: document.getElementById('nombre').value,
       apellido: document.getElementById('apellido').value,
       fecha_cumpleanos: document.getElementById('fecha_cumpleanos').value,
-      usuario: document.getElementById('usuario').value,
+      usuario: document.getElementById('nombreUsuario').value,
       email: email
     });
     alert('Registro completo. Bienvenido!');

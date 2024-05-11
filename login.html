@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="./assets/imgs/logocorazon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="./assets/imgs/logocorazon.ico" >
     <title>HeartMade</title>
     <link rel="stylesheet" href="./assets/stylesheets/login.css">
     <script src="https://kit.fontawesome.com/4e8789eb05.js" crossorigin="anonymous"></script>
@@ -17,25 +17,24 @@
 
     <main>
         <div class="container">
-            <h2><img src="assets/imgs/corazon.png" alt="logo" class="logo">HeartMade</h2>
+            <h1><img src="assets/imgs/corazon.png" alt="logo" class="logo">HeartMade</h1>
             <div class="iniciarSesion">
                 <form id="loginForm">
                     <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" autocomplete="off" class="email-input"
-                            required><br><br>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" autocomplete="off" class="email-input" required><br>
                         <i class="fa-solid fa-envelope"></i>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" id="password" name="password" class="contrasena" required><br><br>
-
+                        <input type="password" id="password" name="password" class="contrasena"
+                            onclick="TogglePassword()" required><br>
                         <i class="fa-solid fa-lock"></i>
                     </div>
                     <p><input type="checkbox">Recuerdame</p>
                     <p><a href="#">Olvidaste tu contraseña</a></p>
                     <button type="submit" id="btn">Login</button><br>
-                    <p><a href="registro.html"><br>¿No tienes una cuenta? <br>Registrate aqui.</a></p>
+                    <p><a href="register.html"><br>¿No tienes una cuenta? <br>Registrate aqui.</a></p>
                 </form>
             </div>
         </div>
@@ -43,5 +42,5 @@
     <footer>
     </footer>
     <script type="module" src="./assets/scripts/inicioDeSesion.js"></script>
-
+    <script src="./assets/scripts/register-script.js"></script>
 </body>
