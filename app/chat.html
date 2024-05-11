@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="../assets/imgs/logocorazon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/imgs/logocorazon.ico">
     <title>HeartMate</title>
     <link rel="stylesheet" href="../assets/stylesheets/main_styles.css">
     <link rel="stylesheet" href="../assets/stylesheets/app_styles.css">
@@ -16,14 +16,14 @@
                     <use xlink:href="../assets/icons/svg-resources.xml#icon-dot-menu"></use>
                 </svg>
             </button>
-            <label class="entry simple" for="search-chats">
+            <div class="entry simple">
                 <label for="search-chats">
                     <svg class="icon">
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-search"></use>
                     </svg>
                 </label>
-                <input type="text" id="search-chats" placeholder="Buscar...">
-            </label>
+                <input type="text" placeholder="Buscar...">
+            </div>
             <nav class="menu__content">
                 <div class="outer-area" onclick="sideMenu_toggle()"></div>
                 <a class="button iconed contrast option back" onclick="sideMenu_toggle()">
@@ -44,7 +44,7 @@
                     </svg>
                     <p>Perfil</p>
                 </a>
-                <a class="button iconed contrast option current" href="./chat.html" class="current">
+                <a class="button iconed contrast option current" href="./chat.html">
                     <svg class="icon">
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-chat-heart-filled"></use>
                     </svg>
@@ -76,7 +76,7 @@
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-profile"></use>
                     </svg>
                 </a>
-                <a class="button iconed current" href="./chat.html" class="current">
+                <a class="button iconed current" href="./chat.html">
                     <svg class="icon">
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-chat-heart-filled"></use>
                     </svg>
@@ -96,14 +96,14 @@
         <main class="app__wrapper">
             <div class="chat-list__wrapper" onclick="currentChat_toggle()">
                 <div class="chat-list__header">
-                    <label class="entry simple" for="search-chats">
+                    <div class="entry simple">
                         <label for="search-chats">
                             <svg class="icon">
                                 <use xlink:href="../assets/icons/svg-resources.xml#icon-search"></use>
                             </svg>
                         </label>
                         <input type="text" id="search-chats" placeholder="Buscar...">
-                    </label>
+                    </div>
                 </div>
                 <div class="chat-preview-card__wrapper current">
                     <div class="user__avatar">
@@ -186,14 +186,14 @@
                             <div class="message__wrapper" id="mensajes">
                             </div>
                             <div class="chatter__wrapper">
-                                <label for="mensajeInput" class="chatter__entry">
+                                <div class="chatter__entry">
                                     <button class="button emogy" id="emogy-btn">
                                         <svg class="icon">
                                             <use xlink:href="../assets/icons/svg-resources.xml#icon-kiss"></use>
                                         </svg>
                                     </button>
                                     <input type="text" id="mensajeInput" placeholder="Escribe un mensaje aquí..." autofocus>
-                                </label>
+                                </div>
                                 <button class="button send" id="enviarBtn">
                                     <svg class="icon">
                                         <use xlink:href="../assets/icons/svg-resources.xml#icon-send"></use>

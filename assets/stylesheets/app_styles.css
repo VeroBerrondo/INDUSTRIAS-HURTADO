@@ -10,7 +10,6 @@
     background-color: var(--color_red-1);
     .app__wrapper {
         display: flex;
-        background-color: rebeccapurple;
         .chat-list__wrapper {
             width: 100%;
             height: 100%;
