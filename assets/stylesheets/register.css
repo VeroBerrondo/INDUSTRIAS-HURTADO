@@ -149,8 +149,7 @@ h1 {
     font-family: cursive;
     display: flex;
     align-items: center;
-    margin: 0;
-    gap: 10px;
+    padding: 20px 0;
 }
 
 .logo {
@@ -167,6 +166,9 @@ h1 {
     margin-right: 5px;
 
 }
-
+textarea{
+    color: #fff;
+    background-color: transparent;
+}
 
     
