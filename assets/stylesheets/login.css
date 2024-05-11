@@ -32,6 +32,10 @@ body {
     flex-direction: column;
 
 }
+input:hover {
+    cursor: pointer;
+}
+
 h2 {
     color: #fff;
     font-family: cursive;

@@ -22,13 +22,13 @@
                 <form id="loginForm">
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" autocomplete="off" class="email-input"
-                            required><br>
+                        <input type="email" id="email" name="email" autocomplete="off" class="email-input" required><br>
                         <i class="fa-solid fa-envelope"></i>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" id="password" name="password" class="contrasena" required><br>
+                        <input type="password" id="password" name="password" class="contrasena"
+                            onclick="TogglePassword()" required><br>
                         <i class="fa-solid fa-lock"></i>
                     </div>
                     <p><input type="checkbox">Recuerdame</p>
@@ -42,5 +42,5 @@
     <footer>
     </footer>
     <script type="module" src="./assets/scripts/inicioDeSesion.js"></script>
-
+    <script src="./assets/scripts/register-script.js"></script>
 </body>
