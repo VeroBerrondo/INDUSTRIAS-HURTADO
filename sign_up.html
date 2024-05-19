@@ -1,68 +1,63 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" type="image/x-icon" href="./assets/imgs/logocorazon.ico" >
+  <link rel="shortcut icon" type="image/x-icon" href="./assets/imgs/logocorazon.ico">
   <title>HeartMate</title>
   <link rel="stylesheet" href="./assets/stylesheets/sign-up_styles.css">
   <script src="https://kit.fontawesome.com/4e8789eb05.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-  <header>
-    <nav>
 
-    </nav>
-  </header>
+
   <main>
     <div class="container">
-      <h1> <img src="assets/imgs/corazon.png" alt="logo" class="logo"> HeartMate</h1><br>
+      <h1><img src="assets/imgs/corazon.png" alt="logo" class="logo">HeartMate</h1><br>
       <div class="formulario-caja visible">
         <form onSubmit="event.preventDefault(), register();" id="registrationForm">
-          <br>
-          <br>
+
           <div class="form-group">
-            <label for="nombre"> Nombre: </label>
-            <input type="text" id="nombre" name="nombre" class="nombre-input" required>
+            <label for="name"> Name: </label>
+            <input type="text" id="name" name="name" required>
             <i class="fa-solid fa-address-book"></i>
           </div>
           <br>
           <div class="form-group">
-            <label for="apellido">Apellido:</label>
-            <input type="text" id="apellido" name="apellido" class="apellido-input" required>
+            <label for="lastname">Last name:</label>
+            <input type="text" id="lastname" name="lastname" required>
             <i class="fa-solid fa-address-book"></i>
           </div>
           <br><br>
           <div class="form-group">
 
-            <label for="fecha_cumpleanos">Fecha de Nacimiento:</label>
-            <input type="date" id="fecha_cumpleanos" name="fecha_cumpleanos
-      " required>
+            <label for="birthdate">Birthdate:</label>
+            <input type="date" id="birthdate" name="birthdate
+    " required>
           </div>
           <br><br>
           <div class="form-group">
-            <label for="nombreUsuario">Usuario:</label>
-            <input type="text" id="nombreUsuario" name="nombreUsuario" class="usuario-input"
-              placeholder="Elige un nombre" required><br>
+            <label for="nameUser">User:</label>
+            <input type="text" id="nameUser" name="nameUser" placeholder="Choose a name" required><br>
             <i class="fa-solid fa-user"></i>
           </div>
           <br><br>
           <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" autocomplete="off" class="email-input" required>
+            <input type="email" id="email" name="email" autocomplete="off" required>
             <i class="fa-solid fa-envelope"></i>
           </div>
           <br><br>
           <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" class="contrasena" placeholder="6 digitos o mas"
-              required onclick="TogglePassword()">
+            <input type="password" id="password" name="password" placeholder="6 digits or more" required
+              onclick="TogglePassword()">
             <i class="fa-solid fa-lock"></i>
           </div>
           <br><br>
-          <button type="submit" id="btn" onclick="nextPanel()">Registrar</button>
+          <button type="submit" id="btn" onclick="nextPanel()">Register</button>
 
 
         </form>
@@ -71,11 +66,11 @@
       <div class="formulario-caja2">
         <form onSubmit="event.preventDefault(),savePreferences()">
 
-          <h2>Queremos Conocerte</h2>
+          <h2>We want to know you</h2>
           <br>
-          <h3>¿En Que Pais Estas?</h3>
+          <h3>¿In which country are you?</h3>
           <br>
-          <select name="pais" id="pais">
+          <select name="country" id="country">
             <option value="AR">Argentina</option>
             <option value="BO">Bolivia</option>
             <option value="BR">Brasil</option>
@@ -88,47 +83,47 @@
             <option value="VE">Venezuela</option>
           </select>
           <br><br>
-          <h3>¿En Que Ciudad?</h3>
+          <h3>¿what city?</h3>
           <br>
           <div class="form-group">
-            <input type="text" id="ciudad" name="ciudad" class="ciudad-input">
+            <input type="text" id="city" name="city">
             <i class="fa-solid fa-city"></i>
           </div>
           <br><br>
-          <h3>¿Que Te Atrae?: </h3>
+          <h3>¿What attracts you?: </h3>
           <br>
-          <input type="radio" name="genero" value="hombre"> Hombres <br>
-          <input type="radio" name="genero" value="mujer"> Mujeres <br>
-          <input type="radio" name="genero" value="Ambos"> Ambos <br>
+          <input type="radio" name="gender" value="man"> Man <br>
+          <input type="radio" name="gender" value="women"> Women <br>
+          <input type="radio" name="gender" value="both"> Both <br>
           <br>
-          <h3>Rango de Edad Preferido</h3>
+          <h3>Preferred age range</h3>
           <br>
-          <input type="checkbox" name="rango" value="20-30"> 20 a 30 años <br>
-          <input type="checkbox" name="rango" value="30-40"> 30 a 40 años <br>
-          <input type="checkbox" name="rango" value="40-50"> 40 a 50 años <br>
-          <input type="checkbox" name="rango" value="50-60"> 50 a 60 años <br>
-          <input type="checkbox" name="rango" value="60-70"> 60 a 70 años <br>
-          <input type="checkbox" name="rango" value="70-90"> 70 a 90 años <br>
+          <input type="checkbox" name="range" value="20-30"> 20 a 30 years <br>
+          <input type="checkbox" name="range" value="30-40"> 30 a 40 years <br>
+          <input type="checkbox" name="range" value="40-50"> 40 a 50 years <br>
+          <input type="checkbox" name="range" value="50-60"> 50 a 60 years <br>
+          <input type="checkbox" name="range" value="60-70"> 60 a 70 years <br>
+          <input type="checkbox" name="range" value="70-90"> 70 a 90 years <br>
           <br>
           <div class="checkbox">
 
-            <h3>¿Que Disfrutas Hacer? </h3>
+            <h3>¿What do you enjoy doing? </h3>
             <br>
-            <input type="checkbox" name="disfruta" value="viajar" class="actividades"> Viajar <br>
-            <input type="checkbox" name="disfruta" value="bailar" class="actividades"> Bailar <br>
-            <input type="checkbox" name="disfruta" value="cine" class="actividades"> Ir al Cine <br>
-            <input type="checkbox" name="disfruta" value="libros" class="actividades"> Leer Libros <br>
-            <input type="checkbox" name="disfruta" value="deportes" class="actividades"> Hacer Deportes <br>
-            <input type="checkbox" name="disfruta" value="turismo" class="actividades"> Turismo de Aventuras <br>
+            <input type="checkbox" name="enjoy" value="travel" class="activities">Travel <br>
+            <input type="checkbox" name="enjoy" value="dance" class="activities"> Dance<br>
+            <input type="checkbox" name="enjoy" value="cinema" class="activities">Go to the movies <br>
+            <input type="checkbox" name="enjoy" value="books" class="activities">Read books<br>
+            <input type="checkbox" name="enjoy" value="sports" class="activities">Do sports<br>
+            <input type="checkbox" name="enjoy" value="tourism" class="activitie">Adventure trip<br>
 
           </div>
           <br>
-          <h3>¿Algo mas que quieras contar?</h3><br>
-          <h3>Escribinos:</h3>
-          <label for="comentarios"></label>
-          <textarea name="comentarios" id="comentarios" cols="30" rows="10"></textarea>
+          <h3>¿Anything else you want to tell?</h3><br>
+          <h3>Write to us:</h3>
+          <label for="comments"></label>
+          <textarea name="comments" id="comments" cols="30" rows="10"></textarea>
           <br>
-          <button id="guardarDatos" type="submit">Guardar</button>
+          <button id="saveData" type="submit">Keep</button>
 
         </form>
 
@@ -136,17 +131,8 @@
     </div>
 
   </main>
-  <footer>
-    <nav>
-
-
-    </nav>
-  </footer>
   <script type="module" src="./assets/scripts/registroFireBase.js"></script>
   <script src="./assets/scripts/register-script.js"></script>
-
-
-
 </body>
 
 </html>

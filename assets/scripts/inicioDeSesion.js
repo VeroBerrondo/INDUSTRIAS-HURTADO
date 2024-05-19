@@ -3,14 +3,15 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.0/fireba
 
 const firebaseConfig = {
 
-  apiKey: "AIzaSyBEYbPUrWo2UNNw8MHy8qdOOzEjGfJKATA",
-  authDomain: "heartmate-168db.firebaseapp.com",
-  projectId: "heartmate-168db",
-  storageBucket: "heartmate-168db.appspot.com",
-  messagingSenderId: "437656068270",
-  appId: "1:437656068270:web:d3fbf3f6a9beaa4b04cd3f",
-  measurementId: "G-TXVE9873VJ"
+  apiKey: "AIzaSyDVSG-i1dkjcWvZgXLJ3Ahp_q6ye-WAhfo",
+  authDomain: "heart-7d6b1.firebaseapp.com",
+  projectId: "heart-7d6b1",
+  storageBucket: "heart-7d6b1.appspot.com",
+  messagingSenderId: "721295981788",
+  appId: "1:721295981788:web:90cf47cb71c37d61da4819",
+  measurementId: "G-SNJQ16Z23B"
 };
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
