@@ -32,6 +32,16 @@ function validarEmail(email) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(email);
 }
+//Funcion para validar que la contraseña tenga 6 caracteres o mas
+function validarPassword(password) {
+  return password.length >= 6;
+}
+const password = "abc123";
+if (validarPassword(password)) {
+  console.log("El password es válido.");
+} else {
+  console.log("El password no es válido. Debe tener al menos 6 caracteres.");
+}
 
 // Obtener el formulario de inicio de sesión
 const loginForm = document.getElementById("loginForm");

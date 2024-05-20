@@ -26,8 +26,18 @@ window.register = async function register() {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
-
-
+  // Función para validar el formato del correo electrónico
+  function validarEmail(email) {
+    // Expresión regular para validar el formato del correo electrónico
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  }
+  // Validar el formato del correo electrónico antes de iniciar sesión
+  if (!validarEmail(email)) {
+    // Si el correo electrónico no tiene un formato válido, mostrar un mensaje de error
+    alert("Por favor, ingresa un correo electrónico válido.");
+    return; // Detener el proceso de inicio de sesión
+  }
   // Comprobación de la longitud de la contraseña
   if (password.length < 6) {
     alert('La contraseña debe tener al menos 6 caracteres.');
