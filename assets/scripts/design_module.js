@@ -35,7 +35,6 @@ function sideMenu_toggle () {
 }
 
 /*----- -----*/
-
 function currentChat_toggle() {
     var wrapper = document.getElementsByClassName("app__wrapper")[0];
     var state = wrapper.classList.contains("chat-visible");

@@ -1,8 +1,8 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js';
-import { getAuth } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js';
 import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, getDoc, doc } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js';
+import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js';
 
-// Configuración de Firebase
+/*----- Datos de la API -----*/
 const firebaseConfig = {
     apiKey: "AIzaSyDVSG-i1dkjcWvZgXLJ3Ahp_q6ye-WAhfo",
     authDomain: "heart-7d6b1.firebaseapp.com",
@@ -13,11 +13,24 @@ const firebaseConfig = {
     measurementId: "G-SNJQ16Z23B"
 };
 
-// Inicializar Firebase
+/*----- Variables de inicio -----*/
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+let currentUserUID = null;
 
+/*----- Procesos Previos -----*/
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        currentUserUID = user.uid;
+        console.log(currentUserUID); 
+    } else {
+        console.log("No hay usuario autenticado.");
+        currentUserUID = null;
+    }
+});
+
+/*----- Funciones Varias -----*/
 function getUserData(userId) {
     const userDocPromise = getDoc(doc(db, "users", userId));
 
@@ -34,20 +47,35 @@ function getUserData(userId) {
     });
 }
 
-const usersRef = db.collection('users');
-const currentUserUID = auth.currentUser.uid;
+/*----- Plantillas de Vue -----*/
+Vue.component('user-card', {
+    props: ['user'],
+    template: `
+        <div class="card">
+            <h2>{{ user.name }} {{ user.lastname }}</h2>
+            <p>{{ user.birthday }}</p>
+            <p>Email: {{ user.email }}</p>
+        </div>
+    `
+});
 
-usersRef.get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-        // Obtener el UID de cada usuario en la colección
-        const userUID = doc.id;
-
-        // Verificar si el usuario no es el usuario actual
-        if (userUID !== currentUserUID) {
-            const userData = doc.data();
-            // Mostrar la información de los usuarios que no sean el usuario actual
-            console.log(userData.name, userData.email);
-            // Aquí puedes agregar lógica para mostrar los datos en tu página HTML
-        }
-    });
+/*----- Funcionamiento de Vue -----*/
+new Vue({
+    el: '#app',
+    data: {
+        usersData: [] // Aquí se almacenarán los datos de los usuarios obtenidos de Firebase
+    },
+    created() {
+        const usersCollection = collection(db, 'users'); // Acceder a la colección 'users'
+        
+        onSnapshot(usersCollection, (querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                const userUID = doc.id;
+                if (userUID !== currentUserUID) {
+                    const userData = doc.data();
+                    this.usersData.push(userData); // Agregar datos del usuario al array usersData
+                }
+            });
+        });
+    }
 });

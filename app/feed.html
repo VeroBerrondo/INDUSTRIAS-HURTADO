@@ -7,6 +7,7 @@
     <title>HeartMate</title>
     <link rel="stylesheet" href="../assets/stylesheets/main_styles.css">
     <link rel="stylesheet" href="../assets/stylesheets/app_styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
 </head>
 <body>
     <div class="app__mount">
@@ -94,10 +95,14 @@
             </nav>    
         </div>
         <main class="app__wrapper">
+            <div id="app">
+                <div v-for="user in usersData" :key="user.id">
+                    <user-card :user="user"></user-card>
+                </div>
+            </div>
         </main>
     </div>
     <script src="../assets/scripts/design_module.js"></script>
-    <script src="../assets/scripts/feed_systems.js"></script>
-    <script src="../assets/scripts/chat_systems.js"></script>
+    <script type="module" src="../assets/scripts/feed_systems.js"></script>
 </body>
 </html>
