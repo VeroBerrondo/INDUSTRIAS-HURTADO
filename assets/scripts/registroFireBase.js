@@ -105,7 +105,7 @@ window.savePreferences = async function savePreferences() {
     });
 
     alert('Preferencias guardadas correctamente.');
-    window.location.href = "log_in.html";
+    window.location.href = "imag.html";
   } catch (error) {
     console.error('Error al guardar preferencias:', error);
     alert('Error al guardar preferencias: ' + error.message);
