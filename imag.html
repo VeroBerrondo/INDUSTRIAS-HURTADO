@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="./assets/imgs/logocorazon.ico">
+    <title>HeartMate</title>
+    <link rel="stylesheet" href="./assets/stylesheets/img.css">
+</head>
+
+<body>
+    <h1> <img src="assets/imgs/corazon.png" alt="logo" class="logo"> HeartMate</h1><br>
+    <h2>Select your profile image</h2>
+    <form id="formulario" onsubmit="chooseImage(event)">
+        <div id="image-container"></div>
+        <input type="radio" id="selectedImage" name="selectedImage">
+        <button type="submit" id="btn">Save picture</button>
+    </form>
+   
+    <script type="module" src="assets/scripts/img.js"></script>
+</body>
+
+</html>
