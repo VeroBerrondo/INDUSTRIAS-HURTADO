@@ -47,6 +47,21 @@ function getUserData(userId) {
     });
 }
 
+/*----- Funcion Principal -----*/
+function createCards(usersList) {
+    const usersCollection = collection(db, 'users');
+        
+    onSnapshot(usersCollection, (querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            const userUID = doc.id;
+            if (userUID !== currentUserUID) {
+                const userData = doc.data();
+                usersList.push(userData);
+            }
+        });
+    });
+}
+
 /*----- Plantillas de Vue -----*/
 Vue.component('user-card', {
     props: ['user'],
@@ -61,7 +76,7 @@ Vue.component('user-card', {
 
 /*----- Funcionamiento de Vue -----*/
 new Vue({
-    el: '#app__mount-vue',
+    el: '#app__mount-feed',
     data: {
         usersData: [],
         maxWidthToShowElement: 799
@@ -70,22 +85,9 @@ new Vue({
         handleResize() {
             this.$forceUpdate();
         },
-        createCards() {
-            const usersCollection = collection(db, 'users'); // Acceder a la colección 'users'
-        
-            onSnapshot(usersCollection, (querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    const userUID = doc.id;
-                    if (userUID !== currentUserUID) {
-                        const userData = doc.data();
-                        this.usersData.push(userData); // Agregar datos del usuario al array usersData
-                    }
-                });
-            });
-        }
     },
     created() {
-        this.createCards()
+        createCards(this.usersData)
     },
     mounted() {
         window.addEventListener('resize', this.handleResize);

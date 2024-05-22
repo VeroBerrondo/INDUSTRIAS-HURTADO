@@ -7,10 +7,11 @@
     <title>HeartMate</title>
     <link rel="stylesheet" href="../assets/stylesheets/main_styles.css">
     <link rel="stylesheet" href="../assets/stylesheets/app_styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
 </head>
 <body>
-    <div class="app__mount">
-        <div class="nav-bar_mobile__wrapper">
+    <div id="app__mount-chat" class="app__mount">
+        <div v-if="window.innerWidth < maxWidthToShowElement" class="nav-bar_mobile__wrapper">
             <button class="button iconed contrast tool" onclick="sideMenu_toggle()">
                 <svg class="icon">
                     <use xlink:href="../assets/icons/svg-resources.xml#icon-dot-menu"></use>
@@ -64,7 +65,7 @@
                 </a>
             </nav> 
         </div>
-        <div class="nav-bar_desktop__wrapper">
+        <div v-else class="nav-bar_desktop__wrapper">
             <nav>
                 <a class="button iconed" href="./feed.html">
                     <svg class="icon">
@@ -148,7 +149,7 @@
                     </div>
                 </div>
             </div>
-            <div class="current-msg__wrapper" id="chat">
+            <div class="current-msg__wrapper">
                 <div class="main-panel__wrapper">
                     <div class="main-panel__content">
                         <div class="chat-mobile__header">
@@ -183,7 +184,8 @@
                             </div>
                         </div>
                         <div class="chat__body">
-                            <div class="message__wrapper" id="mensajes">
+                            <div class="message__wrapper">
+                                <message-card v-for="msgData in messages" :key="msgData.id" :data="msgData"></message-card>
                             </div>
                             <div class="chatter__wrapper">
                                 <div class="chatter__entry">
@@ -192,9 +194,9 @@
                                             <use xlink:href="../assets/icons/svg-resources.xml#icon-kiss"></use>
                                         </svg>
                                     </button>
-                                    <input type="text" id="mensajeInput" placeholder="Escribe un mensaje aquí..." autofocus>
+                                    <input type="text" id="mensajeInput" placeholder="Escribe un mensaje aquí..." autofocus ref="mensajeInput" @keypress.enter="enviarMensaje">
                                 </div>
-                                <button class="button send" id="enviarBtn">
+                                <button class="button send" id="enviarBtn" @click="enviarMensaje">
                                     <svg class="icon">
                                         <use xlink:href="../assets/icons/svg-resources.xml#icon-send"></use>
                                     </svg>

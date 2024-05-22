@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
 </head>
 <body>
-    <div id="app__mount-vue" class="app__mount">
+    <div id="app__mount-feed" class="app__mount">
         <div v-if="window.innerWidth < maxWidthToShowElement" class="nav-bar_mobile__wrapper">
             <button class="button iconed contrast tool" onclick="sideMenu_toggle()">
                 <svg class="icon">
@@ -95,7 +95,7 @@
             </nav>    
         </div>
         <main class="app__wrapper">
-            <div id="app">
+            <div>
                 <div v-for="user in usersData" :key="user.id">
                     <user-card :user="user"></user-card>
                 </div>
