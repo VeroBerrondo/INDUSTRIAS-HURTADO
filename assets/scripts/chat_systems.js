@@ -59,31 +59,51 @@ function getMonthName(mes) {
     return meses[mes - 1];
 }
 
+async function testingImage(saveVars) {
+    const profileImagesCollection = collection(db, 'profileImage');
+    const imageDoc = doc(profileImagesCollection, 'image');
+    
+    try {
+        const imageDocSnapshot = await getDoc(imageDoc);
+        
+        if (imageDocSnapshot.exists()) {
+            const imageData = imageDocSnapshot.data();
+            // Actualiza las propiedades individuales de saveVars en lugar de reemplazar el objeto completo
+            Object.keys(imageData).forEach((key) => {
+                saveVars[key] = imageData[key];
+            });
+            return saveVars;
+        } else {
+            console.log('El documento "image" no existe en la colección "profileImages".');
+            return null;
+        }
+    } catch (error) {
+        console.error('Error al obtener el documento:', error);
+        return null;
+    }
+}
+
 /*----- Funcion Principal -----*/
-function createMessages(messagesList) {
+async function createMessages(messagesList, ImagesList) {
     const messagesQuery = query(collection(db, "mensajes"), orderBy("timestamp"));
 
-    onSnapshot(messagesQuery, (snapshot) => {
-        snapshot.docChanges().forEach((change) => {
+    onSnapshot(messagesQuery, async (snapshot) => {
+        for (const change of snapshot.docChanges()) {
             if (change.type === "added") {
-                /*obtener los datos del mensaje desde la coleccion*/
                 const messageData = change.doc.data();
-                
-                /*inicializar las variables pertinentes*/
+
                 let id = change.doc.id;
                 let profileURL;
                 let UserName;
                 let UserLastName;
                 let content = messageData.content;
-                let dateTime;
                 let selfmsg = false;
 
-                /*ajuste de los datos de fecha*/
                 let fecha;
                 if (messageData.timestamp == null) {
                     fecha = new Date();
                 } else {
-                    fecha = new Date(messageData.timestamp.seconds*1000);
+                    fecha = new Date(messageData.timestamp.seconds * 1000);
                 }
                 const dia = fecha.getDate();
                 const mes = fecha.getMonth() + 1;
@@ -91,7 +111,6 @@ function createMessages(messagesList) {
                 const hora = fecha.getHours();
                 const minutos = fecha.getMinutes();
                 
-                /*variable de mensaje propio*/
                 try {
                     if (messageData.user == auth.currentUser.uid) {
                         selfmsg = true
@@ -99,38 +118,32 @@ function createMessages(messagesList) {
                 } catch {
                     console.log("error al identificar el auth.currentUser")
                 }
-                
-                /*obtencion de los nombres*/
-                getUserData(messageData.user).then((userData) => {
+
+                try {
+                    const userData = await getUserData(messageData.user);
                     UserName = userData.name;
                     UserLastName = userData.lastname;
-                    if (userData.profile) {
-                        profileURL = userData.selectedImage;
-                    } else {
-                        profileURL = "http://cache0.bigcartel.com/product_images/45752467/envelope.jpg"
-                    }
-                }).catch((error) => {
-                    // Manejo de errores si getUserData() falla
+                    const imgID = "image" + userData.selectedImage
+                    profileURL = ImagesList[imgID]
+                } catch (error) {
                     console.error(error);
-                });
-    
-                dateTime = `${getMonthName(mes)} ${dia.toString().padStart(2, '0')} de ${año} ${hora.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`;
+                }
 
-                /*Anexar los datos*/
                 let freshdata = {
                     id: id,
                     profileURL: profileURL,
                     UserName: UserName,
                     UserLastName: UserLastName,
                     content: content,
-                    dateTime: dateTime,
+                    dateTime: `${getMonthName(mes)} ${dia.toString().padStart(2, '0')} de ${año} ${hora.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`,
                     selfmsg: selfmsg
                 }
-                messagesList.push(freshdata)
+                messagesList.push(freshdata);
             }
-        });
+        }
     });
 }
+
 
 /*----- Plantillas de Vue -----*/
 Vue.component('message-card', {
@@ -139,7 +152,7 @@ Vue.component('message-card', {
         <div :class="['message', { 'self-msg': data.selfmsg }]">
             <div class="message__left-section">
                 <div class="avatar">
-                    <img src="{{ data.profileURL }}">
+                    <img :src="data.profileURL">
                 </div>
             </div>
             <div class="message__right-section">
@@ -155,8 +168,10 @@ Vue.component('message-card', {
 new Vue({
     el: '#app__mount-chat',
     data: {
+        currentChatID: "",
         messages: [],
         chatList: [],
+        profileImages: {},
         maxWidthToShowElement: 799
     },
     methods: {
@@ -169,7 +184,13 @@ new Vue({
         }
     },
     created() {
-        createMessages(this.messages)
+        testingImage(this.profileImages)
+        .then(() => {
+            createMessages(this.messages, this.profileImages);
+        })
+        .catch((error) => {
+            console.error('Error al cargar las imágenes de perfil:', error);
+        });
     },
     mounted() {
         window.addEventListener('resize', this.handleResize);
