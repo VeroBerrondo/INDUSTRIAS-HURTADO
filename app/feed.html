@@ -95,10 +95,8 @@
             </nav>    
         </div>
         <main class="app__wrapper">
-            <div>
-                <div v-for="user in usersData" :key="user.id">
-                    <user-card :user="user"></user-card>
-                </div>
+            <div class="cards__wrapper">
+                <user-card v-for="user in usersData" :key="user.id" :user="user"></user-card>
             </div>
         </main>
     </div>

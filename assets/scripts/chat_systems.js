@@ -59,7 +59,7 @@ function getMonthName(mes) {
     return meses[mes - 1];
 }
 
-async function testingImage(saveVars) {
+async function imagesVueLoad(saveVars) {
     const profileImagesCollection = collection(db, 'profileImage');
     const imageDoc = doc(profileImagesCollection, 'image');
     
@@ -184,7 +184,7 @@ new Vue({
         }
     },
     created() {
-        testingImage(this.profileImages)
+        imagesVueLoad(this.profileImages)
         .then(() => {
             createMessages(this.messages, this.profileImages);
         })
