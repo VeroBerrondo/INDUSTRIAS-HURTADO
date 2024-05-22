@@ -61,21 +61,33 @@ Vue.component('user-card', {
 
 /*----- Funcionamiento de Vue -----*/
 new Vue({
-    el: '#app',
+    el: '#app__mount-vue',
     data: {
-        usersData: [] // Aquí se almacenarán los datos de los usuarios obtenidos de Firebase
+        usersData: [],
+        maxWidthToShowElement: 799
+    },
+    methods: {
+        handleResize() {
+            this.$forceUpdate();
+        },
+        createCards() {
+            const usersCollection = collection(db, 'users'); // Acceder a la colección 'users'
+        
+            onSnapshot(usersCollection, (querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    const userUID = doc.id;
+                    if (userUID !== currentUserUID) {
+                        const userData = doc.data();
+                        this.usersData.push(userData); // Agregar datos del usuario al array usersData
+                    }
+                });
+            });
+        }
     },
     created() {
-        const usersCollection = collection(db, 'users'); // Acceder a la colección 'users'
-        
-        onSnapshot(usersCollection, (querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                const userUID = doc.id;
-                if (userUID !== currentUserUID) {
-                    const userData = doc.data();
-                    this.usersData.push(userData); // Agregar datos del usuario al array usersData
-                }
-            });
-        });
-    }
+        this.createCards()
+    },
+    mounted() {
+        window.addEventListener('resize', this.handleResize);
+    },
 });
