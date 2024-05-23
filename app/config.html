@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="../assets/stylesheets/main_styles.css">
     <link rel="stylesheet" href="../assets/stylesheets/app_styles.css">
 </head>
+
 <body>
     <div class="app__mount">
         <div class="nav-bar_mobile__wrapper">
@@ -62,7 +64,7 @@
                     </svg>
                     <p>Configuracion</p>
                 </a>
-            </nav> 
+            </nav>
         </div>
         <div class="nav-bar_desktop__wrapper">
             <nav>
@@ -91,11 +93,86 @@
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-gear"></use>
                     </svg>
                 </a>
-            </nav>    
+            </nav>
         </div>
         <main class="app__wrapper">
+            <div class="">
+                <h2>Select your profile image</h2>
+                <form id="formulario" onsubmit="chooseImage(event)">
+                    <div id="image-container"></div>
+                    <input type="radio" id="selectedImage" name="selectedImage">
+                    <button type="submit" id="btn">Save picture</button>
+                </form>
+            </div>
+            <div class="">
+                <form onSubmit="event.preventDefault(),savePreferences()">
+
+                    <h2>We want to know you</h2>
+                    <br>
+                    <h3>¿In which country are you?</h3>
+                    <br>
+                    <select name="country" id="country">
+                        <option value="AR">Argentina</option>
+                        <option value="BO">Bolivia</option>
+                        <option value="BR">Brasil</option>
+                        <option value="CH">Chile</option>
+                        <option value="CO">Colombia</option>
+                        <option value="EC">Ecuador</option>
+                        <option value="PA">Paraguay</option>
+                        <option value="PE">Peru</option>
+                        <option value="UR">Uruguay</option>
+                        <option value="VE">Venezuela</option>
+                    </select>
+                    <br><br>
+                    <h3>¿what city?</h3>
+                    <br>
+                    <div class="form-group">
+                        <input type="text" id="city" name="city">
+                        <i class="fa-solid fa-city"></i>
+                    </div>
+                    <br><br>
+                    <h3>¿What attracts you?: </h3>
+                    <br>
+                    <input type="radio" name="gender" value="man"> Man <br>
+                    <input type="radio" name="gender" value="women"> Women <br>
+                    <input type="radio" name="gender" value="both"> Both <br>
+                    <br>
+                    <h3>Preferred age range</h3>
+                    <br>
+                    <input type="checkbox" name="range" value="20-30"> 20 a 30 years <br>
+                    <input type="checkbox" name="range" value="30-40"> 30 a 40 years <br>
+                    <input type="checkbox" name="range" value="40-50"> 40 a 50 years <br>
+                    <input type="checkbox" name="range" value="50-60"> 50 a 60 years <br>
+                    <input type="checkbox" name="range" value="60-70"> 60 a 70 years <br>
+                    <input type="checkbox" name="range" value="70-90"> 70 a 90 years <br>
+                    <br>
+                    <div class="checkbox">
+
+                        <h3>¿What do you enjoy doing? </h3>
+                        <br>
+                        <input type="checkbox" name="enjoy" value="travel" class="activities">Travel <br>
+                        <input type="checkbox" name="enjoy" value="dance" class="activities"> Dance<br>
+                        <input type="checkbox" name="enjoy" value="cinema" class="activities">Go to the movies <br>
+                        <input type="checkbox" name="enjoy" value="books" class="activities">Read books<br>
+                        <input type="checkbox" name="enjoy" value="sports" class="activities">Do sports<br>
+                        <input type="checkbox" name="enjoy" value="tourism" class="activitie">Adventure trip<br>
+
+                    </div>
+                    <br>
+                    <h3>¿Anything else you want to tell?</h3><br>
+                    <h3>Write to us:</h3>
+                    <label for="comments"></label>
+                    <textarea name="comments" id="comments" cols="30" rows="10"></textarea>
+                    <br>
+                    <button id="saveData" type="submit">Keep</button>
+
+                </form>
+            </div>
         </main>
     </div>
     <script src="../assets/scripts/design_module.js"></script>
+    <script type="module" src="../assets/scripts/img.js"></script>
+    <script type="module" src="../assets/scripts/registroFireBase.js"></script>
 </body>
+
 </html>
