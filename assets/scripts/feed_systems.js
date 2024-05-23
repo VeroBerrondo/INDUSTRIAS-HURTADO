@@ -47,6 +47,30 @@ function getUserData(userId) {
     });
 }
 
+async function imagesVueLoad(saveVars) {
+    const profileImagesCollection = collection(db, 'profileImage');
+    const imageDoc = doc(profileImagesCollection, 'image');
+    
+    try {
+        const imageDocSnapshot = await getDoc(imageDoc);
+        
+        if (imageDocSnapshot.exists()) {
+            const imageData = imageDocSnapshot.data();
+            // Actualiza las propiedades individuales de saveVars en lugar de reemplazar el objeto completo
+            Object.keys(imageData).forEach((key) => {
+                saveVars[key] = imageData[key];
+            });
+            return saveVars;
+        } else {
+            console.log('El documento "image" no existe en la colección "profileImages".');
+            return null;
+        }
+    } catch (error) {
+        console.error('Error al obtener el documento:', error);
+        return null;
+    }
+}
+
 /*----- Funcion Principal -----*/
 function createCards(usersList) {
     const usersCollection = collection(db, 'users');
@@ -79,6 +103,7 @@ new Vue({
     el: '#app__mount-feed',
     data: {
         usersData: [],
+        profileImages: {},
         maxWidthToShowElement: 799
     },
     methods: {
@@ -87,7 +112,13 @@ new Vue({
         },
     },
     created() {
-        createCards(this.usersData)
+        imagesVueLoad(this.profileImages)
+        .then(() => {
+            createCards(this.usersData, this.profileImages);
+        })
+        .catch((error) => {
+            console.error('Error al cargar las imágenes de perfil:', error);
+        });
     },
     mounted() {
         window.addEventListener('resize', this.handleResize);
