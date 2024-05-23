@@ -23,7 +23,6 @@ let currentUserUID = null;
 onAuthStateChanged(auth, (user) => {
     if (user) {
         currentUserUID = user.uid;
-        console.log(currentUserUID); 
     } else {
         console.log("No hay usuario autenticado.");
         currentUserUID = null;
@@ -72,7 +71,7 @@ async function imagesVueLoad(saveVars) {
 }
 
 /*----- Funcion Principal -----*/
-function createCards(usersList) {
+function createCards(usersList, ImagesList) {
     const usersCollection = collection(db, 'users');
         
     onSnapshot(usersCollection, (querySnapshot) => {
@@ -80,7 +79,22 @@ function createCards(usersList) {
             const userUID = doc.id;
             if (userUID !== currentUserUID) {
                 const userData = doc.data();
-                usersList.push(userData);
+                
+                const imgID = "image" + userData.selectedImage
+                const profileURL = ImagesList[imgID]
+
+                const date = new Date(userData.birthdate)
+
+                const freshdata = {
+                    id: userUID,
+                    imageURL: profileURL,
+                    name: userData.name,
+                    lastName: userData.lastname,
+                    birthdate: date,
+                    email: userData.email
+                }
+
+                usersList.push(freshdata);
             }
         });
     });
@@ -88,12 +102,17 @@ function createCards(usersList) {
 
 /*----- Plantillas de Vue -----*/
 Vue.component('user-card', {
-    props: ['user'],
+    props: ['data'],
     template: `
         <div class="card">
-            <h2>{{ user.name }} {{ user.lastname }}</h2>
-            <p>{{ user.birthday }}</p>
-            <p>Email: {{ user.email }}</p>
+            <div class="card__top" :style="{ 'background-image': 'url(' + data.imageURL + ')' }">
+                <span class="profile"><img :src="data.imageURL"></span>
+            </div>
+            <div class="card__bottom">
+                <h2>{{ data.name }} {{ data.lastName }}</h2>
+                <p>{{ data.birthdate }}</p>
+                <p>Email: {{ data.email }}</p>
+            </div>
         </div>
     `
 });
@@ -115,6 +134,9 @@ new Vue({
         imagesVueLoad(this.profileImages)
         .then(() => {
             createCards(this.usersData, this.profileImages);
+            setTimeout(() => {
+                console.log(this.usersData)
+            }, 2000); 
         })
         .catch((error) => {
             console.error('Error al cargar las imágenes de perfil:', error);

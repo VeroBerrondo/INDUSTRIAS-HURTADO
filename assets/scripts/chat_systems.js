@@ -129,7 +129,7 @@ async function createMessages(messagesList, ImagesList) {
                     console.error(error);
                 }
 
-                let freshdata = {
+                const freshdata = {
                     id: id,
                     profileURL: profileURL,
                     UserName: UserName,
