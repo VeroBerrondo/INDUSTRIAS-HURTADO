@@ -97,6 +97,11 @@
         <main class="app__wrapper">
             <div class="cards__wrapper">
                 <user-card v-for="user in usersData" :key="user.id" :data="user"></user-card>
+                <button class="button send" id="enviarBtn" @click="logout">
+                    <svg class="icon">
+                        <use xlink:href="../assets/icons/svg-resources.xml#icon-send"></use>
+                    </svg>
+                </button>
             </div>
         </main>
     </div>

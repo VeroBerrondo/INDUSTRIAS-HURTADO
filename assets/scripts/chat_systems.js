@@ -18,6 +18,14 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
+/*----- Procesos Previos -----*/
+onAuthStateChanged(auth, (user) => {
+    if (!user) {
+        console.log("No hay usuario autenticado.");
+        window.location.replace('/log_in.html');
+    }
+});
+
 // Limpiar el chat
 document.getElementById('limpiarChat').addEventListener('click', function () {
     document.getElementById('mensajes').innerHTML = '';

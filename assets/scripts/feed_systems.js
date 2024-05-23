@@ -21,31 +21,15 @@ let currentUserUID = null;
 
 /*----- Procesos Previos -----*/
 onAuthStateChanged(auth, (user) => {
-    if (user) {
-        currentUserUID = user.uid;
-    } else {
+    if (!user) {
         console.log("No hay usuario autenticado.");
-        currentUserUID = null;
+        window.location.replace('/log_in.html');
+    } else {
+        currentUserUID = user.uid;
     }
 });
 
 /*----- Funciones Varias -----*/
-function getUserData(userId) {
-    const userDocPromise = getDoc(doc(db, "users", userId));
-
-    return userDocPromise.then((userDoc) => {
-        if (userDoc.exists()) {
-            return userDoc.data();
-        } else {
-            console.error("No se encontró el usuario en Firestore");
-            return "¿?";
-        }
-    }).catch((error) => {
-        console.error("Error al obtener el nombre de usuario:", error);
-        return { usuario: "Error en usuario" };
-    });
-}
-
 async function imagesVueLoad(saveVars) {
     const profileImagesCollection = collection(db, 'profileImage');
     const imageDoc = doc(profileImagesCollection, 'image');
@@ -129,14 +113,20 @@ new Vue({
         handleResize() {
             this.$forceUpdate();
         },
+        logout() {
+            auth.signOut().then(() => {
+                // La sesión se cerró correctamente
+                console.log('Sesión cerrada exitosamente');
+            }).catch((error) => {
+                // Ocurrió un error al cerrar la sesión
+                console.error('Error al cerrar la sesión', error);
+            }); 
+        }
     },
     created() {
         imagesVueLoad(this.profileImages)
         .then(() => {
             createCards(this.usersData, this.profileImages);
-            setTimeout(() => {
-                console.log(this.usersData)
-            }, 2000); 
         })
         .catch((error) => {
             console.error('Error al cargar las imágenes de perfil:', error);
