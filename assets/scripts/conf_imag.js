@@ -86,55 +86,78 @@ function displayImages(selectedImageId) {
     });
 }
 
-// Llamar a la función para mostrar las imágenes cuando se carga la página
-window.onload = function () {
-    onAuthStateChanged(auth, async (user) => {
-        if (user) {
-            const userId = user.uid;
-            const userDoc = await getDoc(doc(db, "users", userId));
-            if (userDoc.exists()) {
-                const selectedImageId = userDoc.data().selectedImage;
-                displayImages(selectedImageId);
-            } else {
-                displayImages(null);
-            }
-        } else {
-            displayImages(null);
+/*----- Funcionamiento de Vue -----*/
+new Vue({
+    el: '#app__mount-config',
+    data: {
+        maxWidthToShowElement: 799
+    },
+    methods: {
+        handleResize() {
+            this.$forceUpdate();
+        },
+        logout() {
+            auth.signOut().then(() => {
+                console.log('Sesión cerrada exitosamente');
+            }).catch((error) => {
+                console.error('Error al cerrar la sesión', error);
+            }); 
         }
-    });
-}
-
-// Función para manejar la selección de imagen
-window.chooseImage = async function chooseImage(event) {
-    event.preventDefault();  
-
-    const selectedImage = document.querySelector('input[name="selectedImage"]:checked');
-    if (!selectedImage) {
-        alert('Por favor selecciona una imagen.');
-        return;
-    }
-
-    onAuthStateChanged(auth, async (user) => {
-        if (user) {
-            const userId = user.uid; // Obtener el ID del usuario actual
-            try {
-                await setDoc(doc(db, "users", userId), {
-                    selectedImage: selectedImage.value
-                }, { merge: true });
-
-                // Actualizar la imagen mostrada
-                const selectedImageElement = anime_imagesjson.find(img => img.id == selectedImage.value);
-                if (selectedImageElement) {
-                    document.querySelector('#selectedImage').src = selectedImageElement.direccion;
+    },
+    mounted() {
+        window.addEventListener('resize', this.handleResize);
+        // Llamar a la función para mostrar las imágenes cuando se carga la página
+        window.onload = function () {
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    const userId = user.uid;
+                    const userDoc = await getDoc(doc(db, "users", userId));
+                    if (userDoc.exists()) {
+                        const selectedImageId = userDoc.data().selectedImage;
+                        displayImages(selectedImageId);
+                    } else {
+                        displayImages(null);
+                    }
                 } else {
-                    console.error('No se encontró la imagen seleccionada en anime_imagesjson');
+                    console.log("No hay usuario autenticado.");
+                    window.location.replace('/log_in.html');
                 }
-
-                alert('Imagen de perfil guardada correctamente.');
-            } catch (error) {
-                console.error('Error al guardar la imagen:', error);
-                alert('Error al guardar la imagen: ' + error.message);
-            }
+            });
         }
-    });
-}
+
+        // Función para manejar la selección de imagen
+        window.chooseImage = async function chooseImage(event) {
+            event.preventDefault();  
+
+            const selectedImage = document.querySelector('input[name="selectedImage"]:checked');
+            if (!selectedImage) {
+                alert('Por favor selecciona una imagen.');
+                return;
+            }
+
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    const userId = user.uid; // Obtener el ID del usuario actual
+                    try {
+                        await setDoc(doc(db, "users", userId), {
+                            selectedImage: selectedImage.value
+                        }, { merge: true });
+
+                        // Actualizar la imagen mostrada
+                        const selectedImageElement = anime_imagesjson.find(img => img.id == selectedImage.value);
+                        if (selectedImageElement) {
+                            document.querySelector('#selectedImage').src = selectedImageElement.direccion;
+                        } else {
+                            console.error('No se encontró la imagen seleccionada en anime_imagesjson');
+                        }
+
+                        alert('Imagen de perfil guardada correctamente.');
+                    } catch (error) {
+                        console.error('Error al guardar la imagen:', error);
+                        alert('Error al guardar la imagen: ' + error.message);
+                    }
+                }
+            });
+        }
+    },
+});
