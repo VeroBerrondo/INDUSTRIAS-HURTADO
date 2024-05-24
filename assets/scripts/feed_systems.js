@@ -75,7 +75,6 @@ function createCards(usersList, ImagesList) {
                     name: userData.name,
                     lastName: userData.lastname,
                     birthdate: date,
-                    email: userData.email
                 }
 
                 usersList.push(freshdata);
@@ -89,13 +88,32 @@ Vue.component('user-card', {
     props: ['data'],
     template: `
         <div class="card">
-            <div class="card__top" :style="{ 'background-image': 'url(' + data.imageURL + ')' }">
-                <span class="profile"><img :src="data.imageURL"></span>
+            <div class="card__top">
+                <img :src="data.imageURL">
             </div>
             <div class="card__bottom">
-                <h2>{{ data.name }} {{ data.lastName }}</h2>
-                <p>{{ data.birthdate }}</p>
-                <p>Email: {{ data.email }}</p>
+                <div><h2>{{ data.name }} {{ data.lastName }}</h2></div>
+                <div>
+                    <p>{{ data.birthdate }}</p>
+                    <p>comentarios</p>
+                </div>
+                <div class="card__options">
+                    <button class="button iconed borderless-icon">
+                        <svg class="icon">
+                            <use xlink:href="../assets/icons/svg-resources.xml#icon-add-heart"></use>
+                        </svg>
+                    </button>
+                    <button class="button iconed borderless-icon">
+                        <svg class="icon">
+                            <use xlink:href="../assets/icons/svg-resources.xml#icon-give-heart"></use>
+                        </svg>
+                    </button>
+                    <button class="button iconed borderless-icon">
+                        <svg class="icon">
+                            <use xlink:href="../assets/icons/svg-resources.xml#icon-chat-heart-filled"></use>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     `

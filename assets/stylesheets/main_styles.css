@@ -103,6 +103,14 @@
                 }
             }
         }
+        &.borderless-icon {
+            .icon {
+                width: 60%;
+                color: var(--color_beige-1);
+                fill: currentColor;
+                stroke-width: 2px;
+            } 
+        }
         .icon {
             width: 60%;
             color: var(--color_beige-1);

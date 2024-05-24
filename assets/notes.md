@@ -47,3 +47,30 @@ onAuthStateChanged(auth, (user) => {
         currentUserUid = null;
     }
 });
+
+            .testing {
+                width: 100px;
+                height: 100px;
+                overflow: hidden;
+                position: relative;
+                &::before {
+                    content: "";
+                    display: block;
+                    width: 200%;
+                    height: 200%;
+                    position: absolute;
+                    border-radius: 50%;
+                    bottom: 0;
+                    right: 0;
+                    box-shadow: 50px 50px 0 0 red;
+                }
+            }
+            .testingTwo {
+                position: relative;
+                width: 0;
+                height: 0;
+                border-left: 100px solid transparent; /* Triángulo */
+                border-right: 100px solid transparent; /* Triángulo */
+                border-bottom: 200px solid lightblue; /* Parte sólida */
+                clip-path: polygon(0 0, 100% 0, 50% 100%);
+            }
