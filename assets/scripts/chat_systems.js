@@ -189,6 +189,15 @@ new Vue({
         enviarMensaje() {
             const message = this.$refs.mensajeInput.value;
             sendMessage(message);
+        },
+        logout() {
+            auth.signOut().then(() => {
+                // La sesión se cerró correctamente
+                console.log('Sesión cerrada exitosamente');
+            }).catch((error) => {
+                // Ocurrió un error al cerrar la sesión
+                console.error('Error al cerrar la sesión', error);
+            }); 
         }
     },
     created() {

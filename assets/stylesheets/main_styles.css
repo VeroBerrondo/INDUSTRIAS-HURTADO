@@ -125,7 +125,7 @@
             }
             
         }
-        &.current {
+        &.current, &:hover {
             background-color: var(--color_pink-3);
             &.contrast .icon {
                 color: var(--color_beige-1);
@@ -138,6 +138,9 @@
                 stroke: none;
                 stroke-width: 0;
             }
+        }
+        &:hover {
+            background-color: var(--color_pink-2);
         }
     }
 }

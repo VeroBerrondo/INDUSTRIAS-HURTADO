@@ -63,6 +63,11 @@
                     </svg>
                     <p>Configuracion</p>
                 </a>
+                <button class="button iconed contrast option" id="enviarBtn" @click="logout">
+                    <svg class="icon">
+                        <use xlink:href="../assets/icons/svg-resources.xml#icon-logout"></use>
+                    </svg>
+                </button>
             </nav> 
         </div>
         <div v-else class="nav-bar_desktop__wrapper">
@@ -92,16 +97,16 @@
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-gear"></use>
                     </svg>
                 </a>
+                <button class="button iconed" id="enviarBtn" @click="logout">
+                    <svg class="icon">
+                        <use xlink:href="../assets/icons/svg-resources.xml#icon-logout"></use>
+                    </svg>
+                </button>
             </nav>    
         </div>
         <main class="app__wrapper">
             <div class="cards__wrapper">
                 <user-card v-for="user in usersData" :key="user.id" :data="user"></user-card>
-                <button class="button send" id="enviarBtn" @click="logout">
-                    <svg class="icon">
-                        <use xlink:href="../assets/icons/svg-resources.xml#icon-send"></use>
-                    </svg>
-                </button>
             </div>
         </main>
     </div>
