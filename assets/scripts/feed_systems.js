@@ -54,27 +54,54 @@ async function imagesVueLoad(saveVars) {
     }
 }
 
+function getMonthName(mes) {
+    const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    return meses[mes - 1];
+}
+
+function getUserInfo(userId) {
+    const userDocPromise = getDoc(doc(db, "preferences", userId));
+
+    return userDocPromise.then((userDoc) => {
+        if (userDoc.exists()) {
+            return userDoc.data();
+        } else {
+            console.error("No se encontró el usuario en Firestore");
+            return "¿?";
+        }
+    }).catch((error) => {
+        console.error("Error al obtener el nombre de usuario:", error);
+        return { usuario: "Error en usuario" };
+    });
+}
+
 /*----- Funcion Principal -----*/
 function createCards(usersList, ImagesList) {
     const usersCollection = collection(db, 'users');
         
     onSnapshot(usersCollection, (querySnapshot) => {
-        querySnapshot.forEach((doc) => {
+        querySnapshot.forEach(async (doc) => {
             const userUID = doc.id;
             if (userUID !== currentUserUID) {
                 const userData = doc.data();
-                
+                const userPreferences = await getUserInfo(userUID)
+
                 const imgID = "image" + userData.selectedImage
                 const profileURL = ImagesList[imgID]
 
-                const date = new Date(userData.birthdate)
+                const fecha = new Date(userData.birthdate)
+
+                const dia = fecha.getDate();
+                const mes = fecha.getMonth() + 1;
+                const año = fecha.getFullYear();
 
                 const freshdata = {
                     id: userUID,
                     imageURL: profileURL,
                     name: userData.name,
                     lastName: userData.lastname,
-                    birthdate: date,
+                    birthdate: `Nacio el ${dia.toString().padStart(2, '0')} de ${getMonthName(mes)} del año ${año}`,
+                    comments: `Le gusta ${userPreferences.activities.join(" ")}`
                 }
 
                 usersList.push(freshdata);
@@ -95,7 +122,7 @@ Vue.component('user-card', {
                 <div><h2>{{ data.name }} {{ data.lastName }}</h2></div>
                 <div>
                     <p>{{ data.birthdate }}</p>
-                    <p>comentarios</p>
+                    <p>{{ data.comments }}</p>
                 </div>
                 <div class="card__options">
                     <button class="button iconed borderless-icon">
