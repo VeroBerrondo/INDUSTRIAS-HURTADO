@@ -194,7 +194,7 @@
                             </div>
                         </div>
                         <div class="chat__body">
-                            <div class="message__wrapper">
+                            <div class="message__wrapper" ref="messageWrapper">
                                 <message-card v-for="msgData in messages" :key="msgData.id" :data="msgData"></message-card>
                             </div>
                             <div class="chatter__wrapper">

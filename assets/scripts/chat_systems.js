@@ -147,6 +147,8 @@ async function createMessages(messagesList, ImagesList) {
                     selfmsg: selfmsg
                 }
                 messagesList.push(freshdata);
+                const event = new CustomEvent('nuevo-mensaje-recibido', { detail: { scrollNeeded: true } });
+                document.dispatchEvent(event);
             }
         }
     });
@@ -192,10 +194,8 @@ new Vue({
         },
         logout() {
             auth.signOut().then(() => {
-                // La sesión se cerró correctamente
                 console.log('Sesión cerrada exitosamente');
             }).catch((error) => {
-                // Ocurrió un error al cerrar la sesión
                 console.error('Error al cerrar la sesión', error);
             }); 
         }
@@ -211,5 +211,15 @@ new Vue({
     },
     mounted() {
         window.addEventListener('resize', this.handleResize);
+        document.addEventListener('nuevo-mensaje-recibido', (event) => {
+            const scrollNeeded = event.detail.scrollNeeded;
+        
+            if (scrollNeeded) {
+                this.$nextTick(() => {
+                    const messageWrapper = this.$refs.messageWrapper;
+                    messageWrapper.scrollTop = messageWrapper.scrollHeight - messageWrapper.clientHeight;
+                });
+            }
+        });
     },
 });

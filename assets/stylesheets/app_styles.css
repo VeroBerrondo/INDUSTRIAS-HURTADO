@@ -101,6 +101,7 @@
                         grid-template-rows: auto max-content;
                         overflow: hidden;
                         .message__wrapper {
+                            scroll-behavior: smooth;
                             padding-right: 3%;
                             padding-left: 3%;
                             width: 94%;
