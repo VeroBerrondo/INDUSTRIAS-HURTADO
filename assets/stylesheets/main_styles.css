@@ -34,6 +34,12 @@
     /* ExtraBold = font-weight: 800 */
 }
 
+@keyframes sweetroll {
+    0% {transform: translateX(5px) rotateZ(45deg);}
+    50% {transform: translateX(-5px) rotateZ(-45deg);}
+    100% {transform: translateX(5px) rotateZ(45deg);}
+}
+
 .app__mount {
     border: 0;
     margin: 0;
@@ -103,6 +109,14 @@
                 }
             }
         }
+        &.borderless-icon {
+            .icon {
+                width: 60%;
+                color: var(--color_beige-1);
+                fill: currentColor;
+                stroke-width: 2px;
+            } 
+        }
         .icon {
             width: 60%;
             color: var(--color_beige-1);
@@ -123,9 +137,14 @@
             &.current {
                 background-color: transparent;
             }
-            
+            &:hover {
+                .icon {
+                    animation: sweetroll 1s infinite;
+                }
+                background-color: transparent;
+            }
         }
-        &.current {
+        &.current, .borderless-icon:hover {
             background-color: var(--color_pink-3);
             &.contrast .icon {
                 color: var(--color_beige-1);
@@ -138,6 +157,9 @@
                 stroke: none;
                 stroke-width: 0;
             }
+        }
+        &:hover {
+            background-color: var(--color_pink-1);
         }
     }
 }
@@ -182,4 +204,13 @@
     aspect-ratio: 1/1;
     fill: currentColor;
     min-width: 14px;
+}
+
+@keyframes bg_rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

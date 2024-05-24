@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,23 +8,26 @@
     <title>HeartMate</title>
     <link rel="stylesheet" href="../assets/stylesheets/main_styles.css">
     <link rel="stylesheet" href="../assets/stylesheets/app_styles.css">
+    <link rel="stylesheet" href="../assets/stylesheets/conf_provisoria_imag.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
 </head>
+
 <body>
-    <div class="app__mount">
-        <div class="nav-bar_mobile__wrapper">
+    <div id="app__mount-config" class="app__mount">
+        <div v-if="window.innerWidth < maxWidthToShowElement" class="nav-bar_mobile__wrapper">
             <button class="button iconed contrast tool" onclick="sideMenu_toggle()">
                 <svg class="icon">
                     <use xlink:href="../assets/icons/svg-resources.xml#icon-dot-menu"></use>
                 </svg>
             </button>
-            <label class="entry simple" for="search-chats">
+            <div class="entry simple">
                 <label for="search-chats">
                     <svg class="icon">
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-search"></use>
                     </svg>
                 </label>
-                <input type="text" id="search-chats" placeholder="Buscar...">
-            </label>
+                <input type="text" placeholder="Buscar...">
+            </div>
             <nav class="menu__content">
                 <div class="outer-area" onclick="sideMenu_toggle()"></div>
                 <a class="button iconed contrast option back" onclick="sideMenu_toggle()">
@@ -44,7 +48,7 @@
                     </svg>
                     <p>Perfil</p>
                 </a>
-                <a class="button iconed contrast option" href="./chat.html">
+                <a class="button iconed contrast option current" href="./chat.html">
                     <svg class="icon">
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-chat-heart-filled"></use>
                     </svg>
@@ -56,15 +60,21 @@
                     </svg>
                     <p>Notificaciones</p>
                 </a>
-                <a class="button iconed contrast option current" href="./config.html">
+                <a class="button iconed contrast option" href="./config.html">
                     <svg class="icon">
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-gear"></use>
                     </svg>
                     <p>Configuracion</p>
                 </a>
+                <button class="button iconed contrast option" id="enviarBtn" @click="logout">
+                    <svg class="icon">
+                        <use xlink:href="../assets/icons/svg-resources.xml#icon-logout"></use>
+                    </svg>
+                    <p>Cerrar sesion</p>
+                </button>
             </nav> 
         </div>
-        <div class="nav-bar_desktop__wrapper">
+        <div v-else class="nav-bar_desktop__wrapper">
             <nav>
                 <a class="button iconed" href="./feed.html">
                     <svg class="icon">
@@ -76,7 +86,7 @@
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-profile"></use>
                     </svg>
                 </a>
-                <a class="button iconed" href="./chat.html">
+                <a class="button iconed current" href="./chat.html">
                     <svg class="icon">
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-chat-heart-filled"></use>
                     </svg>
@@ -86,16 +96,31 @@
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-bell"></use>
                     </svg>
                 </a>
-                <a class="button iconed current" href="./config.html">
+                <a class="button iconed" href="./config.html">
                     <svg class="icon">
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-gear"></use>
                     </svg>
                 </a>
+                <button class="button iconed" id="enviarBtn" @click="logout">
+                    <svg class="icon">
+                        <use xlink:href="../assets/icons/svg-resources.xml#icon-logout"></use>
+                    </svg>
+                </button>
             </nav>    
         </div>
         <main class="app__wrapper">
+            <section id="profile-image-section">
+                <h2>Cambia tu imagen de perfil</h2>
+                <form id="formulario" onsubmit="chooseImage(event)">
+                    <div id="image-container"></div>
+                    <input type="radio" id="selectedImage" name="selectedImage">
+                    <button type="submit" id="btn">Guardar imagen</button>
+                </form>
+            </section>
         </main>
     </div>
     <script src="../assets/scripts/design_module.js"></script>
+    <script type="module" src="../assets/scripts/conf_imag.js"></script>
 </body>
+
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +7,11 @@
     <title>HeartMate</title>
     <link rel="stylesheet" href="../assets/stylesheets/main_styles.css">
     <link rel="stylesheet" href="../assets/stylesheets/app_styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
 </head>
 <body>
-    <div class="app__mount">
-        <div class="nav-bar_mobile__wrapper">
+    <div id="app__mount-feed" class="app__mount">
+        <div v-if="window.innerWidth < maxWidthToShowElement" class="nav-bar_mobile__wrapper">
             <button class="button iconed contrast tool" onclick="sideMenu_toggle()">
                 <svg class="icon">
                     <use xlink:href="../assets/icons/svg-resources.xml#icon-dot-menu"></use>
@@ -62,9 +63,14 @@
                     </svg>
                     <p>Configuracion</p>
                 </a>
+                <button class="button iconed contrast option" id="enviarBtn" @click="logout">
+                    <svg class="icon">
+                        <use xlink:href="../assets/icons/svg-resources.xml#icon-logout"></use>
+                    </svg>
+                </button>
             </nav> 
         </div>
-        <div class="nav-bar_desktop__wrapper">
+        <div v-else class="nav-bar_desktop__wrapper">
             <nav>
                 <a class="button iconed current" href="./feed.html">
                     <svg class="icon">
@@ -91,13 +97,20 @@
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-gear"></use>
                     </svg>
                 </a>
+                <button class="button iconed" id="enviarBtn" @click="logout">
+                    <svg class="icon">
+                        <use xlink:href="../assets/icons/svg-resources.xml#icon-logout"></use>
+                    </svg>
+                </button>
             </nav>    
         </div>
         <main class="app__wrapper">
+            <div class="cards__wrapper">
+                <user-card v-for="user in usersData" :key="user.id" :data="user"></user-card>
+            </div>
         </main>
     </div>
     <script src="../assets/scripts/design_module.js"></script>
-    <script src="../assets/scripts/feed_systems.js"></script>
-    <script src="../assets/scripts/chat_systems.js"></script>
+    <script type="module" src="../assets/scripts/feed_systems.js"></script>
 </body>
 </html>

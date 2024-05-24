@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./assets/icons/logocorazon.ico" type="image/x-icon">
     <title>HeartMate</title>
-    <link rel="stylesheet" href="./assets/stylesheets/article_styles.css">
+    <link rel="stylesheet" href="./estilos.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.3.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
 </head>
 
@@ -18,13 +17,12 @@
     <div class="layer">
         <div class="layer-effect">
             <div class="glass-effect">
-
                 <header>
                     <div class="navbar">
-                        <a href="#" class="logo">
+                        <div class="logo">
                             <img src="./assets/imgs/corazon.png" alt="logo corazón" class="logo-img">
                             <h1 class="nombre">HeartMate</h1>
-                        </a>
+                        </div>
 
                         <nav class="">
                             <input class="checkbox" type="checkbox">
@@ -32,16 +30,12 @@
                             <i class="icons fi fi-br-cross"></i>
 
                             <ul class="menu">
-                                <li><a href="#" class="">Conoce personas</a></li>
-                                <li><a href="./sign_up.html" class="">Registrate</a></li>
-                                <li><a href="./log_in.html" class="button">Iniciar Sesión</a></li>
+                                <li><a href="sign_up.html" class="">Registrate</a></li>
+                                <li><a href="log_in.html" class="button">Iniciar Sesión</a></li>
                             </ul>
-                            
                         </nav>
                     </div>
                 </header>
-
-
                 <main>
                     <div class="grid">
                         <div class="textos-inicio">
@@ -53,46 +47,43 @@
                             </h1>
                             <p><br>En HeartMate nos importan los verdaderos lazos de amor y amistad. Este es tu
                                 momento de hacer conexión más allá de las apariencias y encontrar a esa persona especial
-                                con
-                                tan solo un click.</p>
-                            <a href="./sign_up.html" class="button2">Comienza ahora</a>
+                                con tan solo un click.</p>
+                            <a href="sign_up.html" class="button2">Comienza ahora</a>
                         </div>
                         <div class="img-pareja">
                             <img src="./assets/imgs/pareja.jpg" alt="" class="img">
                         </div>
                     </div>
-
-
                     <div class="instrucciones">
                         <h1 class="">Comienza a conectar en 3 simples pasos</h1>
                     </div>
-                    <section class="instruccionesFondo">
+                    <div class="instruccionesFondo">
                         <section class="grid">
                             <div class="items">
-
                                 <div class="item">
-                                    <img width="100px" src="./assets/imgs/paso1.png" alt="Paso 1" class="paso">
+                                    <img width="100" src="./assets/imgs/paso1.png" alt="Paso 1" class="paso">
                                     <h2>PASO 1</h2>
                                     <h2 style="color: rgb(4, 69, 95);"> Crea tu perfil</h2>
                                     <p>Regístrate en pocos segundos y cuéntanos acerca de ti, tus gustos y hobbies</p>
                                 </div>
                                 <div class="item">
-                                    <img width="100px" src="./assets/imgs/paso2.png" alt="Paso 2" class="paso">
+                                    <img width="100" src="./assets/imgs/paso2.png" alt="Paso 2" class="paso">
                                     <h2>PASO 2</h2>
                                     <h2 style="color: rgb(4, 69, 95);">Visita otros perfiles</h2>
                                     <p>Navega por nuestra amplia cartera de miembros y visita cada uno de los perfiles
                                     </p>
                                 </div>
                                 <div class="item">
-                                    <img width="100px" src="./assets/imgs/paso3.png" alt="Paso 3" class="paso">
+                                    <img width="100" src="./assets/imgs/paso3.png" alt="Paso 3" class="paso">
                                     <h2>PASO 3</h2>
                                     <h2 style="color: rgb(4, 69, 95);">Contacta con personas</h2>
                                     <p>Envía un mensaje a cualquier persona según tus gustos y preferencias</p>
                                 </div>
                             </div>
+                            
                         </section>
-                    </section>
-                    <section class="puntos">
+                    </div>
+                    <div class="puntos">
                         <div class="grid">
                             <div class="punto">
                                 <div class="itemCorazon">
@@ -107,40 +98,56 @@
                                     <img src="./assets/icons/logocorazon.ico" alt="logo corazón" class="corazon">
                                     <p>Interactúa en la sala de Chat</p>
                                 </div>
-                                <div class="itemCorazon">
-                                    <img src="./assets/icons/logocorazon.ico" alt="logo corazón" class="corazon">
-                                    <p>Respetamos tu privacidad</p>
-                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slider container -->
+                    <div class="slides-container">
+                        <div class="mySlides fade">
+                            <div class="numbertext">1 / 5</div>
+                            <img src="./assets/imgs/Marcela.png" class="persona" alt="usuario-imagen">
 
-                            </div>
                         </div>
-                    </section>
-                    <section class="historias grid">
-                        <div class="textos-historias">
-                            <div class="texto-historia">
-                                <h2>Historias de éxito</h2>
-                                <p>Durante años, HeartMate ha sido el intermediario entre miles de personas que
-                                    felizmente han encontrado su alma gemela. Ellos quieren compartir sus historias con
-                                    nosotros.</p>
-                            </div>
-                            <div class="texto-historia">
-                                <h3>bla bla</h3>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim iusto impedit mollitia
-                                    perferendis excepturi explicabo nostrum iure, provident deleniti porro?</p>
-                            </div>
-                            <div class="texto-historia">
-                                <h3>bla bla</h3>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim iusto impedit mollitia
-                                    perferendis excepturi explicabo nostrum iure, provident deleniti porro?</p>
-                            </div>
+
+                        <div class="mySlides fade">
+                            <div class="numbertext">2 / 5</div>
+                            <img src="./assets/imgs/JoseLuis.png" class="persona" alt="usuario-imagen">
+
                         </div>
-                        <div class="img-historia">
-                            <img src="./assets/imgs/pareja.jpg" alt="" class="img">
+
+                        <div class="mySlides fade">
+                            <div class="numbertext">3 / 5</div>
+                            <img src="./assets/imgs/Vero.png" class="persona" alt="usuario-imagen">
+
                         </div>
-                    </section>
+
+                        <div class="mySlides fade">
+                            <div class="numbertext">4 / 5</div>
+                            <img src="./assets/imgs/Miguel.png" class="persona" alt="usuario-imagen">
+
+                        </div>
+
+                        <div class="mySlides fade">
+                            <div class="numbertext">5 / 5</div>
+                            <img src="./assets/imgs/Luly.png" class="persona" alt="usuario-imagen">
+
+                        </div>
+
+                        <div class="texto-historia">
+                            <h2>Historias de éxito</h2><br>
+                            <p>Si has llegado hasta aquí, déjanos decirte que estás en el lugar correcto. Encontrar
+                                pareja y conocer un amor verdadero, para muchos nunca había sido tan sencillo.
+                              <br><br>
+                              Durante años, HeartMate ha sido el intermediario entre miles de personas que felizmente han encontrado su alma gemela. Ellos quieren compartir sus historias contigo.
+                        </div>
+
+                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                    </div>
+
                 </main>
-                <footer>
 
+                <footer>
                     <div class="footerContainer">
                         <p style="font-weight: bold;">Visita nuestras redes sociales</p>
                         <div class="socialIcons">
@@ -155,19 +162,16 @@
                             </a>
                         </div>
                         <div class="footerBottom">
-                            <p>Copyright &copy;2024, Diseñado por &nbsp <span class="diseñadores">Industrias
+                            <p>Copyright &copy; 2024, Diseñado por &nbsp; <span class="diseñadores">Industrias
                                     Hurtado</span>
                             </p>
                             <img class="Hurtado" src="./assets/imgs/Hurtado.png" alt="logo Hurtado">
                         </div>
                     </div>
-
                 </footer>
             </div>
         </div>
     </div>
-
-
+    <script src="./main.js"></script>
 </body>
-
 </html>

@@ -1,8 +1,8 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js';
-import { getAuth } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js';
 import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, getDoc, doc } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js';
+import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js';
 
-// Configuración de Firebase
+/*----- Datos de la API -----*/
 const firebaseConfig = {
     apiKey: "AIzaSyDVSG-i1dkjcWvZgXLJ3Ahp_q6ye-WAhfo",
     authDomain: "heart-7d6b1.firebaseapp.com",
@@ -13,13 +13,62 @@ const firebaseConfig = {
     measurementId: "G-SNJQ16Z23B"
 };
 
-// Inicializar Firebase
+/*----- Variables de inicio -----*/
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+const activitiesDict = {
+    travel: "viajar",
+    dance: "bailar",
+    cinema: "ir al cine",
+    books: "leer libros",
+    sports: "hacer deportes",
+    tourism: "hacer turismo"
+}
+let currentUserUID = null;
 
-function getUserData(userId) {
-    const userDocPromise = getDoc(doc(db, "users", userId));
+/*----- Procesos Previos -----*/
+onAuthStateChanged(auth, (user) => {
+    if (!user) {
+        console.log("No hay usuario autenticado.");
+        window.location.replace('/log_in.html');
+    } else {
+        currentUserUID = user.uid;
+    }
+});
+
+/*----- Funciones Varias -----*/
+async function imagesVueLoad(saveVars) {
+    const profileImagesCollection = collection(db, 'profileImage');
+    const imageDoc = doc(profileImagesCollection, 'image');
+    
+    try {
+        const imageDocSnapshot = await getDoc(imageDoc);
+        
+        if (imageDocSnapshot.exists()) {
+            const imageData = imageDocSnapshot.data();
+            // Actualiza las propiedades individuales de saveVars en lugar de reemplazar el objeto completo
+            Object.keys(imageData).forEach((key) => {
+                saveVars[key] = imageData[key];
+            });
+            return saveVars;
+        } else {
+            console.log('El documento "image" no existe en la colección "profileImages".');
+            return null;
+        }
+    } catch (error) {
+        console.error('Error al obtener el documento:', error);
+        return null;
+    }
+}
+
+function getMonthName(mes) {
+    const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    return meses[mes - 1];
+}
+
+function getUserInfo(userId) {
+    const userDocPromise = getDoc(doc(db, "preferences", userId));
 
     return userDocPromise.then((userDoc) => {
         if (userDoc.exists()) {
@@ -34,20 +83,112 @@ function getUserData(userId) {
     });
 }
 
-const usersRef = db.collection('users');
-const currentUserUID = auth.currentUser.uid;
+/*----- Funcion Principal -----*/
+function createCards(usersList, ImagesList) {
+    const usersCollection = collection(db, 'users');
+        
+    onSnapshot(usersCollection, (querySnapshot) => {
+        querySnapshot.forEach(async (doc) => {
+            const userUID = doc.id;
+            if (userUID !== currentUserUID) {
+                const userData = doc.data();
+                const userPreferences = await getUserInfo(userUID)
 
-usersRef.get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-        // Obtener el UID de cada usuario en la colección
-        const userUID = doc.id;
+                const imgID = "image" + userData.selectedImage
+                const profileURL = ImagesList[imgID]
 
-        // Verificar si el usuario no es el usuario actual
-        if (userUID !== currentUserUID) {
-            const userData = doc.data();
-            // Mostrar la información de los usuarios que no sean el usuario actual
-            console.log(userData.name, userData.email);
-            // Aquí puedes agregar lógica para mostrar los datos en tu página HTML
-        }
+                const fecha = new Date(userData.birthdate)
+
+                const dia = fecha.getDate();
+                const mes = fecha.getMonth() + 1;
+                const año = fecha.getFullYear();
+
+                let freshdata = {
+                    id: userUID,
+                    imageURL: profileURL,
+                    name: userData.name,
+                    lastName: userData.lastname,
+                    birthdate: `Nacio el ${dia.toString().padStart(2, '0')} de ${getMonthName(mes)} del año ${año}`,
+                    comments: `Le gusta ${userPreferences.activities.join(", ")}`
+                }
+
+                usersList.push(freshdata);
+            }
+        });
     });
+}
+
+/*----- Plantillas de Vue -----*/
+Vue.component('user-card', {
+    props: ['data'],
+    template: `
+        <div class="card">
+            <div class="card__content">
+                <div class="card__top">
+                    <img :src="data.imageURL">
+                </div>
+                <div class="card__bottom">
+                    <div class="decoration"></div>
+                    <div><h2>{{ data.name }} {{ data.lastName }}</h2></div>
+                    <div>
+                        <p>{{ data.birthdate }}</p>
+                        <p>{{ data.comments }}</p>
+                    </div>
+                    <div class="card__options">
+                        <button class="button iconed borderless-icon">
+                            <svg class="icon">
+                                <use xlink:href="../assets/icons/svg-resources.xml#icon-add-heart"></use>
+                            </svg>
+                        </button>
+                        <button class="button iconed borderless-icon">
+                            <svg class="icon">
+                                <use xlink:href="../assets/icons/svg-resources.xml#icon-give-heart"></use>
+                            </svg>
+                        </button>
+                        <button class="button iconed borderless-icon">
+                            <svg class="icon">
+                                <use xlink:href="../assets/icons/svg-resources.xml#icon-chat-heart-filled"></use>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `
+});
+
+/*----- Funcionamiento de Vue -----*/
+new Vue({
+    el: '#app__mount-feed',
+    data: {
+        usersData: [],
+        profileImages: {},
+        maxWidthToShowElement: 799
+    },
+    methods: {
+        handleResize() {
+            this.$forceUpdate();
+        },
+        logout() {
+            auth.signOut().then(() => {
+                // La sesión se cerró correctamente
+                console.log('Sesión cerrada exitosamente');
+            }).catch((error) => {
+                // Ocurrió un error al cerrar la sesión
+                console.error('Error al cerrar la sesión', error);
+            }); 
+        }
+    },
+    created() {
+        imagesVueLoad(this.profileImages)
+        .then(() => {
+            createCards(this.usersData, this.profileImages);
+        })
+        .catch((error) => {
+            console.error('Error al cargar las imágenes de perfil:', error);
+        });
+    },
+    mounted() {
+        window.addEventListener('resize', this.handleResize);
+    },
 });

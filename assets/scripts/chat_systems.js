@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js';
-import { getAuth } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js';
+import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js';
 import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, getDoc, doc } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js';
 
 // Configuración de Firebase
@@ -18,6 +18,20 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
+/*----- Procesos Previos -----*/
+onAuthStateChanged(auth, (user) => {
+    if (!user) {
+        console.log("No hay usuario autenticado.");
+        window.location.replace('/log_in.html');
+    }
+});
+
+// Limpiar el chat
+document.getElementById('limpiarChat').addEventListener('click', function () {
+    document.getElementById('mensajes').innerHTML = '';
+})
+
+/*----- Funciones Varias -----*/
 function getUserData(userId) {
     const userDocPromise = getDoc(doc(db, "users", userId));
 
@@ -34,7 +48,6 @@ function getUserData(userId) {
     });
 }
 
-// Enviar mensaje a Firestore
 async function sendMessage(message) {
     if (message.trim() === "") return;
     try {
@@ -49,104 +62,164 @@ async function sendMessage(message) {
     }
 }
 
-// botón enviar
-document.getElementById('enviarBtn').addEventListener('click', () => {
-    const message = document.getElementById('mensajeInput').value;
-    sendMessage(message);
-});
-
-// tecla Enter
-document.getElementById('mensajeInput').addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') {
-        sendMessage(event.target.value);
-    }
-});
-
-// Aux para fechas
 function getMonthName(mes) {
     const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
     return meses[mes - 1];
 }
 
-// Escuchar nuevos mensajes desde Firestore
-const messagesQuery = query(collection(db, "mensajes"), orderBy("timestamp"));
-
-onSnapshot(messagesQuery, (snapshot) => {
-    const messagesContainer = document.getElementById('mensajes');
-    snapshot.docChanges().forEach((change) => {
-        if (change.type === "added") {
-            const messageData = change.doc.data();
-
-            const messageWrapper = document.createElement('div'); //Envoltorio de todo el mensaje
-            const messageLeftWrapper = document.createElement('div'); //Envoltorio izquierdo
-            const messageRightWrapper = document.createElement('div');
-            const messageLabel = document.createElement('p'); //Contenido del mensaje
-            const messageDateTime = document.createElement('span'); //Hora del mensaje
-            const messageUser = document.createElement('span');//Usuario del mensaje
-            const messageImageWrapper = document.createElement('div');//Envoltorio de imagen
-            const messageImage = document.createElement('img');//imagen
-
-            let fecha;
-
-            if (messageData.timestamp == null) {
-                fecha = new Date();
-            } else {
-                fecha = new Date(messageData.timestamp.seconds*1000);
-            }
-
-            const dia = fecha.getDate();
-            const mes = fecha.getMonth() + 1;
-            const año = fecha.getFullYear();
-            const hora = fecha.getHours();
-            const minutos = fecha.getMinutes();
-
-            messageLeftWrapper.classList.add("message__left-section");
-            messageRightWrapper.classList.add("message__right-section");
-            messageWrapper.classList.add("message");
-            
-            try {
-                if (messageData.user == auth.currentUser.uid) {
-                    messageWrapper.classList.add("self-msg");
-                }
-            } catch {
-                console.log("error al identificar el auth.currentUser")
-            }
-
-            messageImageWrapper.classList.add("avatar");
-            messageLabel.classList.add("content");
-            messageUser.classList.add("user");
-            messageDateTime.classList.add("time");
-
-            messageLabel.innerHTML = messageData.content;
-            
-            getUserData(messageData.user).then((userData) => {
-                messageUser.textContent = userData.usuario;
-                if (userData.profile) {
-                    messageImage.src = userData.profile;
-                } else {
-                    messageImage.src = "http://cache0.bigcartel.com/product_images/45752467/envelope.jpg"
-                }
-            }).catch((error) => {
-                // Manejo de errores si getUserData() falla
-                console.error(error);
+async function imagesVueLoad(saveVars) {
+    const profileImagesCollection = collection(db, 'profileImage');
+    const imageDoc = doc(profileImagesCollection, 'image');
+    
+    try {
+        const imageDocSnapshot = await getDoc(imageDoc);
+        
+        if (imageDocSnapshot.exists()) {
+            const imageData = imageDocSnapshot.data();
+            // Actualiza las propiedades individuales de saveVars en lugar de reemplazar el objeto completo
+            Object.keys(imageData).forEach((key) => {
+                saveVars[key] = imageData[key];
             });
+            return saveVars;
+        } else {
+            console.log('El documento "image" no existe en la colección "profileImages".');
+            return null;
+        }
+    } catch (error) {
+        console.error('Error al obtener el documento:', error);
+        return null;
+    }
+}
 
-            messageDateTime.textContent = `${getMonthName(mes)} ${dia.toString().padStart(2, '0')} de ${año} ${hora.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`;
-            
-            messagesContainer.appendChild(messageWrapper);
-            messageWrapper.appendChild(messageLeftWrapper);
-            messageWrapper.appendChild(messageRightWrapper)
+/*----- Funcion Principal -----*/
+async function createMessages(messagesList, ImagesList) {
+    const messagesQuery = query(collection(db, "mensajes"), orderBy("timestamp"));
 
-            messageLeftWrapper.appendChild(messageImageWrapper);
-            messageImageWrapper.appendChild(messageImage);
-            messageRightWrapper.appendChild(messageUser);
-            messageRightWrapper.appendChild(messageLabel);
-            messageRightWrapper.appendChild(messageDateTime);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    onSnapshot(messagesQuery, async (snapshot) => {
+        for (const change of snapshot.docChanges()) {
+            if (change.type === "added") {
+                const messageData = change.doc.data();
+
+                let id = change.doc.id;
+                let profileURL;
+                let UserName;
+                let UserLastName;
+                let content = messageData.content;
+                let selfmsg = false;
+
+                let fecha;
+                if (messageData.timestamp == null) {
+                    fecha = new Date();
+                } else {
+                    fecha = new Date(messageData.timestamp.seconds * 1000);
+                }
+                const dia = fecha.getDate();
+                const mes = fecha.getMonth() + 1;
+                const año = fecha.getFullYear();
+                const hora = fecha.getHours();
+                const minutos = fecha.getMinutes();
+                
+                try {
+                    if (messageData.user == auth.currentUser.uid) {
+                        selfmsg = true
+                    }
+                } catch {
+                    console.log("error al identificar el auth.currentUser")
+                }
+
+                try {
+                    const userData = await getUserData(messageData.user);
+                    UserName = userData.name;
+                    UserLastName = userData.lastname;
+                    const imgID = "image" + userData.selectedImage
+                    profileURL = ImagesList[imgID]
+                } catch (error) {
+                    console.error(error);
+                }
+
+                const freshdata = {
+                    id: id,
+                    profileURL: profileURL,
+                    UserName: UserName,
+                    UserLastName: UserLastName,
+                    content: content,
+                    dateTime: `${getMonthName(mes)} ${dia.toString().padStart(2, '0')} de ${año} ${hora.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}`,
+                    selfmsg: selfmsg
+                }
+                messagesList.push(freshdata);
+                const event = new CustomEvent('nuevo-mensaje-recibido', { detail: { scrollNeeded: true } });
+                document.dispatchEvent(event);
+            }
         }
     });
-    // Limpiar el chat
-    document.getElementById('limpiarChat').addEventListener('click', function () {
-        document.getElementById('mensajes').innerHTML = '';
-    })
+}
+
+
+/*----- Plantillas de Vue -----*/
+Vue.component('message-card', {
+    props: ['data'],
+    template: `
+        <div :class="['message', { 'self-msg': data.selfmsg }]">
+            <div class="message__left-section">
+                <div class="avatar">
+                    <img :src="data.profileURL">
+                </div>
+            </div>
+            <div class="message__right-section">
+                <span class="user">{{ data.UserName }} {{ data.UserLastName }}</span>
+                <p class="content">{{ data.content }}</p>
+                <span class="time">{{ data.dateTime }}</span>
+            </div>
+        </div>
+    `
+});
+
+/*----- Funcionamiento de Vue -----*/
+new Vue({
+    el: '#app__mount-chat',
+    data: {
+        currentChatID: "",
+        messages: [],
+        chatList: [],
+        profileImages: {},
+        maxWidthToShowElement: 799
+    },
+    methods: {
+        handleResize() {
+            this.$forceUpdate();
+        },
+        enviarMensaje() {
+            const message = this.$refs.mensajeInput.value;
+            sendMessage(message);
+        },
+        logout() {
+            auth.signOut().then(() => {
+                console.log('Sesión cerrada exitosamente');
+            }).catch((error) => {
+                console.error('Error al cerrar la sesión', error);
+            }); 
+        }
+    },
+    created() {
+        imagesVueLoad(this.profileImages)
+        .then(() => {
+            createMessages(this.messages, this.profileImages);
+        })
+        .catch((error) => {
+            console.error('Error al cargar las imágenes de perfil:', error);
+        });
+    },
+    mounted() {
+        window.addEventListener('resize', this.handleResize);
+        document.addEventListener('nuevo-mensaje-recibido', (event) => {
+            const scrollNeeded = event.detail.scrollNeeded;
+        
+            if (scrollNeeded) {
+                this.$nextTick(() => {
+                    const messageWrapper = this.$refs.messageWrapper;
+                    messageWrapper.scrollTop = messageWrapper.scrollHeight - messageWrapper.clientHeight;
+                });
+            }
+        });
+    },
 });
