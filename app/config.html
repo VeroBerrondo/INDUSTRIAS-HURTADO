@@ -96,11 +96,18 @@
             </nav>
         </div>
         <main class="app__wrapper">
-           
+            <section id="profile-image-section">
+                <h2>Change your profile image</h2>
+                <form id="formulario" onsubmit="chooseImage(event)">
+                    <div id="image-container"></div>
+                    <input type="radio" id="selectedImage" name="selectedImage">
+                    <button type="submit" id="btn">Save picture</button>
+                </form>
+            </section>
         </main>
     </div>
     <script src="../assets/scripts/design_module.js"></script>
-   
+    <script type="module" src="../assets/scripts/conf_imag.js"></script>
 </body>
 
 </html>
