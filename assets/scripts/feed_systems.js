@@ -17,6 +17,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+const activitiesDict = {
+    travel: "viajar",
+    dance: "bailar",
+    cinema: "ir al cine",
+    books: "leer libros",
+    sports: "hacer deportes",
+    tourism: "hacer turismo"
+}
 let currentUserUID = null;
 
 /*----- Procesos Previos -----*/
@@ -95,13 +103,13 @@ function createCards(usersList, ImagesList) {
                 const mes = fecha.getMonth() + 1;
                 const año = fecha.getFullYear();
 
-                const freshdata = {
+                let freshdata = {
                     id: userUID,
                     imageURL: profileURL,
                     name: userData.name,
                     lastName: userData.lastname,
                     birthdate: `Nacio el ${dia.toString().padStart(2, '0')} de ${getMonthName(mes)} del año ${año}`,
-                    comments: `Le gusta ${userPreferences.activities.join(" ")}`
+                    comments: `Le gusta ${userPreferences.activities.join(", ")}`
                 }
 
                 usersList.push(freshdata);
@@ -115,32 +123,34 @@ Vue.component('user-card', {
     props: ['data'],
     template: `
         <div class="card">
-            <div class="card__top">
-                <img :src="data.imageURL">
-            </div>
-            <div class="card__bottom">
-                <div class="decoration"></div>
-                <div><h2>{{ data.name }} {{ data.lastName }}</h2></div>
-                <div>
-                    <p>{{ data.birthdate }}</p>
-                    <p>{{ data.comments }}</p>
+            <div class="card__content">
+                <div class="card__top">
+                    <img :src="data.imageURL">
                 </div>
-                <div class="card__options">
-                    <button class="button iconed borderless-icon">
-                        <svg class="icon">
-                            <use xlink:href="../assets/icons/svg-resources.xml#icon-add-heart"></use>
-                        </svg>
-                    </button>
-                    <button class="button iconed borderless-icon">
-                        <svg class="icon">
-                            <use xlink:href="../assets/icons/svg-resources.xml#icon-give-heart"></use>
-                        </svg>
-                    </button>
-                    <button class="button iconed borderless-icon">
-                        <svg class="icon">
-                            <use xlink:href="../assets/icons/svg-resources.xml#icon-chat-heart-filled"></use>
-                        </svg>
-                    </button>
+                <div class="card__bottom">
+                    <div class="decoration"></div>
+                    <div><h2>{{ data.name }} {{ data.lastName }}</h2></div>
+                    <div>
+                        <p>{{ data.birthdate }}</p>
+                        <p>{{ data.comments }}</p>
+                    </div>
+                    <div class="card__options">
+                        <button class="button iconed borderless-icon">
+                            <svg class="icon">
+                                <use xlink:href="../assets/icons/svg-resources.xml#icon-add-heart"></use>
+                            </svg>
+                        </button>
+                        <button class="button iconed borderless-icon">
+                            <svg class="icon">
+                                <use xlink:href="../assets/icons/svg-resources.xml#icon-give-heart"></use>
+                            </svg>
+                        </button>
+                        <button class="button iconed borderless-icon">
+                            <svg class="icon">
+                                <use xlink:href="../assets/icons/svg-resources.xml#icon-chat-heart-filled"></use>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
