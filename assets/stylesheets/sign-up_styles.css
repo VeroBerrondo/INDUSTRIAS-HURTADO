@@ -6,17 +6,20 @@
 }
 
 body {
+height: 100%;
+    margin: 0;
+}
 
-
-    width: 100%;
-    height: 100%;
-    background: url(../imgs/pareja1.jpg) no-repeat;
-    background-position: center;
+.app_wrapper {
+    background-image: url(../imgs/pareja1.jpg);
     background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
-
+    align-items: center;
+    overflow: hidden;
 }
 
 input:hover {
