@@ -47,12 +47,13 @@ const anime_imagesjson = [
     { "id": 27, "direccion": "https://i.pinimg.com/564x/54/97/8c/54978cc0313c182fe0cff769311ab549.jpg" },
     { "id": 28, "direccion": "https://i.pinimg.com/564x/d2/d7/95/d2d7951c38d35ca2fdaba4207f226bf4.jpg" },
     { "id": 29, "direccion": "https://i.pinimg.com/564x/9a/d1/e3/9ad1e30e6103c3c6d300dd8b813984ed.jpg" },
-    { "id": 30, "direccion": "https://i.pinimg.com/564x/86/07/71/860771294647df6c320d3f0f44efe0ca.jpg" }
+    { "id": 30, "direccion": "https://i.pinimg.com/564x/86/07/71/860771294647df6c320d3f0f44efe0ca.jpg" },
+    { "id": 31, "direccion": "https://images-ng.pixai.art/images/orig/0952237c-164f-4a11-9446-86ce1b0030fc"}
 ];
 // Función para mostrar las imágenes en la página
 function displayImages(selectedImageId) {
     const imageContainer = document.getElementById('image-container');
-    imageContainer.innerHTML = ''; 
+    imageContainer.innerHTML = '';
     anime_imagesjson.forEach(image => {
         const imageDiv = document.createElement('div');
         imageDiv.classList.add('image-item');
@@ -65,7 +66,7 @@ function displayImages(selectedImageId) {
         const radioButton = document.createElement('input');
         radioButton.type = 'radio';
         radioButton.name = 'selectedImage';
-        radioButton.value = image.id; 
+        radioButton.value = image.id;
 
         if (image.id == selectedImageId) {
             radioButton.checked = true;
@@ -101,7 +102,7 @@ new Vue({
                 console.log('Sesión cerrada exitosamente');
             }).catch((error) => {
                 console.error('Error al cerrar la sesión', error);
-            }); 
+            });
         }
     },
     mounted() {
@@ -127,7 +128,7 @@ new Vue({
 
         // Función para manejar la selección de imagen
         window.chooseImage = async function chooseImage(event) {
-            event.preventDefault();  
+            event.preventDefault();
 
             const selectedImage = document.querySelector('input[name="selectedImage"]:checked');
             if (!selectedImage) {
