@@ -119,6 +119,7 @@ Vue.component('user-card', {
                 <img :src="data.imageURL">
             </div>
             <div class="card__bottom">
+                <div class="decoration"></div>
                 <div><h2>{{ data.name }} {{ data.lastName }}</h2></div>
                 <div>
                     <p>{{ data.birthdate }}</p>
