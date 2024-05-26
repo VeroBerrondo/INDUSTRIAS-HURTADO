@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js';
-import { getFirestore, collection, onSnapshot, getDoc, doc } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js';
+import { getFirestore, collection, getDoc, doc, setDoc } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js';
 import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js';
 
 /*----- Datos de la API -----*/
@@ -30,17 +30,23 @@ onAuthStateChanged(auth, (user) => {
 });
 
 /*----- Funciones Varias -----*/
+
+/**
+ * image4: ["valor en la nube", "4"]
+ * @returns {object} retorna una lista por clave.
+ */
 async function imagesVueLoad(saveVars) {
     const profileImagesCollection = collection(db, 'profileImage');
     const imageDoc = doc(profileImagesCollection, 'image');
-    
+
     try {
         const imageDocSnapshot = await getDoc(imageDoc);
         
         if (imageDocSnapshot.exists()) {
             const imageData = imageDocSnapshot.data();
             Object.keys(imageData).forEach((key) => {
-                saveVars[key] = imageData[key];
+                const number = key.replace("image", "");
+                saveVars[key] = [imageData[key], number];
             });
             return saveVars;
         } else {
@@ -75,73 +81,72 @@ function getUserInfo(userId) {
 }
 
 /*----- Funcion Principal -----*/
-function createCards(usersList, ImagesList) {
-    const usersCollection = collection(db, 'users');
+async function createUserCard(ImagesList, currentUserDict) {
+    const userDoc = doc(collection(db, 'users'), currentUserUID);
         
-    onSnapshot(usersCollection, (querySnapshot) => {
-        querySnapshot.forEach(async (doc) => {
-            const userUID = doc.id;
-            if (userUID !== currentUserUID) {
-                const userData = doc.data();
-                const userPreferences = await getUserInfo(userUID)
+    const docSnap = await getDoc(userDoc);
+    if (docSnap.exists()) {
+        const userData = docSnap.data();
+        const userPreferences = await getUserInfo(currentUserUID);
 
-                const imgID = "image" + userData.selectedImage
-                const profileURL = ImagesList[imgID];
+        const imgID = userData.selectedImage;
+        const profileURL = ImagesList[ "image" + imgID][0];
 
-                const fecha = new Date(userData.birthdate)
+        const fecha = new Date(userData.birthdate);
+        const dia = fecha.getDate();
+        const mes = fecha.getMonth() + 1;
+        const año = fecha.getFullYear();
 
-                const dia = fecha.getDate();
-                const mes = fecha.getMonth() + 1;
-                const año = fecha.getFullYear();
+        let freshdata = {
+            id: currentUserUID,
+            imageURL: profileURL,
+            imgID: imgID,
+            name: userData.name,
+            lastName: userData.lastname,
+            birthdate: `Nació el ${dia.toString().padStart(2, '0')} de ${getMonthName(mes)} del año ${año}`,
+            comments: `Le gusta ${userPreferences.activities.join(", ")}`
+        };
 
-                let freshdata = {
-                    id: userUID,
-                    imageURL: profileURL,
-                    name: userData.name,
-                    lastName: userData.lastname,
-                    birthdate: `Nacio el ${dia.toString().padStart(2, '0')} de ${getMonthName(mes)} del año ${año}`,
-                    comments: `Le gusta ${userPreferences.activities.join(", ")}`
-                }
-
-                usersList.push(freshdata);
-            }
+        Object.keys(freshdata).forEach((key) => {
+            currentUserDict[key] = freshdata[key];
         });
-    });
+    } else {
+        console.log('No such document!');
+    }
 }
 
 /*----- Plantillas de Vue -----*/
-Vue.component('user-card', {
-    props: ['data'],
+Vue.component('current-profile-card', {
+    props: ['data', 'executable'],
     template: `
-        <div class="card">
+        <div class="card currentProfile">
             <div class="card__content">
-                <div class="card__top" @click="handleCardTouch">
+                <div class="card__top">
                     <img :src="data.imageURL">
                 </div>
-                <div class="card__bottom" @click="handleCardTouch">
-                    <div class="decoration"></div>
+                <div class="card__bottom">
                     <div><h2>{{ data.name }} {{ data.lastName }}</h2></div>
                     <div>
                         <p>{{ data.birthdate }}</p>
                         <p>{{ data.comments }}</p>
                     </div>
-                    <div class="card__options">
-                        <button class="button iconed borderless-icon">
-                            <svg class="icon">
-                                <use xlink:href="../assets/icons/svg-resources.xml#icon-add-heart"></use>
-                            </svg>
-                        </button>
-                        <button class="button iconed borderless-icon">
-                            <svg class="icon">
-                                <use xlink:href="../assets/icons/svg-resources.xml#icon-give-heart"></use>
-                            </svg>
-                        </button>
-                        <button class="button iconed borderless-icon">
-                            <svg class="icon">
-                                <use xlink:href="../assets/icons/svg-resources.xml#icon-chat-heart-filled"></use>
-                            </svg>
-                        </button>
-                    </div>
+                    <button class="button simple" @click="executable">Guardar nueva imagen seleccionada</button>
+                </div>
+            </div>
+        </div>
+    `
+});
+
+Vue.component('new-image-card', {
+    props: ['data', 'user'],
+    template: `
+        <div v-if="data[1] !== user.imgID" class="card new_image" @click="handleCardTouch"">
+            <div class="card__content">
+                <label :for="data[1]" class="card__top">
+                    <img :src="data[0]">
+                </label>
+                <div class="card__hidden">
+                    <input :id="data[1]" type="radio" name="images" :value="data[1]">
                 </div>
             </div>
         </div>
@@ -156,11 +161,12 @@ Vue.component('user-card', {
 
 /*----- Funcionamiento de Vue -----*/
 new Vue({
-    el: '#app__mount-feed',
+    el: '#app__mount-config',
     data: {
-        usersData: [],
+        userData: {},
         profileImages: {},
-        maxWidthToShowElement: 799
+        maxWidthToShowElement: 799,
+        dataLoaded: false,
     },
     methods: {
         handleResize() {
@@ -172,12 +178,34 @@ new Vue({
             }).catch((error) => {
                 console.error('Error al cerrar la sesión', error);
             }); 
+        },
+        async saveNewImage() {
+            const selectedInput = document.querySelector('input[name="images"]:checked');
+            if (selectedInput) {
+                try {
+                    await setDoc(doc(db, "users", currentUserUID), {
+                        selectedImage: selectedInput.value
+                    }, { merge: true });
+
+                    // Actualizar la imagen mostrada
+                    alert('Imagen de perfil guardada correctamente.');
+                    window.location.reload();                    
+                } catch (error) {
+                    console.error('Error al guardar la imagen:', error);
+                    alert('Error al guardar la imagen: ' + error.message);
+                }
+            } else {
+                console.log("denegado", selectedInput);
+                alert('Por favor selecciona una imagen.');
+            }
         }
     },
     created() {
         imagesVueLoad(this.profileImages)
         .then(() => {
-            createCards(this.usersData, this.profileImages);
+            createUserCard(this.profileImages, this.userData).then(()=> {
+                this.dataLoaded = true;
+            })
         })
         .catch((error) => {
             console.error('Error al cargar las imágenes de perfil:', error);
@@ -185,5 +213,5 @@ new Vue({
     },
     mounted() {
         window.addEventListener('resize', this.handleResize);
-    },
+    }
 });

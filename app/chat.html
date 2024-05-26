@@ -18,12 +18,12 @@
                 </svg>
             </button>
             <div class="entry simple">
-                <label for="search-chats">
+                <label for="local-search">
                     <svg class="icon">
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-search"></use>
                     </svg>
                 </label>
-                <input type="text" placeholder="Buscar...">
+                <input id="local-search" type="text" placeholder="Buscar...">
             </div>
             <nav class="menu__content">
                 <div class="outer-area" onclick="sideMenu_toggle()"></div>
@@ -63,12 +63,12 @@
                     </svg>
                     <p>Configuracion</p>
                 </a>
-                <button class="button iconed contrast option" id="enviarBtn" @click="logout">
+                <a class="button iconed contrast option" @click="logout">
                     <svg class="icon">
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-logout"></use>
                     </svg>
                     <p>Cerrar sesion</p>
-                </button>
+                </a>
             </nav> 
         </div>
         <div v-else class="nav-bar_desktop__wrapper">
@@ -205,9 +205,9 @@
                                             <use xlink:href="../assets/icons/svg-resources.xml#icon-kiss"></use>
                                         </svg>
                                     </button>
-                                    <input type="text" id="mensajeInput" placeholder="Escribe un mensaje aquí..." autofocus ref="mensajeInput" @keypress.enter="enviarMensaje">
+                                    <input type="text" placeholder="Escribe un mensaje aquí..." autofocus ref="mensajeInput" @keypress.enter="enviarMensaje">
                                 </div>
-                                <button class="button send" id="enviarBtn" @click="enviarMensaje">
+                                <button class="button send" @click="enviarMensaje">
                                     <svg class="icon">
                                         <use xlink:href="../assets/icons/svg-resources.xml#icon-send"></use>
                                     </svg>

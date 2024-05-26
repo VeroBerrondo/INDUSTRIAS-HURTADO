@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="../assets/imgs/logocorazon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/imgs/logocorazon.ico">
     <title>HeartMate</title>
     <link rel="stylesheet" href="../assets/stylesheets/main_styles.css">
     <link rel="stylesheet" href="../assets/stylesheets/app_styles.css">
@@ -21,12 +21,12 @@
                 </svg>
             </button>
             <div class="entry simple">
-                <label for="search-chats">
+                <label for="local-search">
                     <svg class="icon">
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-search"></use>
                     </svg>
                 </label>
-                <input type="text" placeholder="Buscar...">
+                <input id="local-search" type="text" placeholder="Buscar...">
             </div>
             <nav class="menu__content">
                 <div class="outer-area" onclick="sideMenu_toggle()"></div>
@@ -48,7 +48,7 @@
                     </svg>
                     <p>Perfil</p>
                 </a>
-                <a class="button iconed contrast option current" href="./chat.html">
+                <a class="button iconed contrast option" href="./chat.html">
                     <svg class="icon">
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-chat-heart-filled"></use>
                     </svg>
@@ -60,18 +60,18 @@
                     </svg>
                     <p>Notificaciones</p>
                 </a>
-                <a class="button iconed contrast option" href="./config.html">
+                <a class="button iconed contrast option current" href="./config.html">
                     <svg class="icon">
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-gear"></use>
                     </svg>
                     <p>Configuracion</p>
                 </a>
-                <button class="button iconed contrast option" id="enviarBtn" @click="logout">
+                <a class="button iconed contrast option" @click="logout">
                     <svg class="icon">
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-logout"></use>
                     </svg>
                     <p>Cerrar sesion</p>
-                </button>
+                </a>
             </nav> 
         </div>
         <div v-else class="nav-bar_desktop__wrapper">
@@ -86,7 +86,7 @@
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-profile"></use>
                     </svg>
                 </a>
-                <a class="button iconed current" href="./chat.html">
+                <a class="button iconed" href="./chat.html">
                     <svg class="icon">
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-chat-heart-filled"></use>
                     </svg>
@@ -96,7 +96,7 @@
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-bell"></use>
                     </svg>
                 </a>
-                <a class="button iconed" href="./config.html">
+                <a class="button iconed current" href="./config.html">
                     <svg class="icon">
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-gear"></use>
                     </svg>
@@ -109,18 +109,14 @@
             </nav>    
         </div>
         <main class="app__wrapper">
-            <section id="profile-image-section">
-                <h2>Cambia tu imagen de perfil</h2>
-                <form id="formulario" onsubmit="chooseImage(event)">
-                    <div id="image-container"></div>
-                    <input type="radio" id="selectedImage" name="selectedImage">
-                    <button type="submit" id="btn">Guardar imagen</button>
-                </form>
-            </section>
+            <div class="config__wrapper" v-if="dataLoaded">
+                <current-profile-card :data="userData" :executable="saveNewImage"></current-profile-card>
+                <new-image-card v-for="image in profileImages" :key="image[1]" :data="image" :user="userData"></new-image-card>
+            </div>
         </main>
     </div>
     <script src="../assets/scripts/design_module.js"></script>
-    <script type="module" src="../assets/scripts/conf_imag.js"></script>
+    <script type="module" src="../assets/scripts/config_systems.js"></script>
 </body>
 
 </html>
