@@ -212,6 +212,7 @@ new Vue({
     mounted() {
         window.addEventListener('resize', this.handleResize);
         document.addEventListener('nuevo-mensaje-recibido', (event) => {
+            console.log(this.$refs.chatCard_main)
             const scrollNeeded = event.detail.scrollNeeded;
         
             if (scrollNeeded) {

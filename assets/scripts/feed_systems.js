@@ -90,7 +90,7 @@ function createCards(usersList, ImagesList) {
 
                 const fecha = new Date(userData.birthdate)
 
-                const dia = fecha.getDate()+1;
+                const dia = fecha.getDate() + 1;
                 const mes = fecha.getMonth() + 1;
                 const año = fecha.getFullYear();
 
