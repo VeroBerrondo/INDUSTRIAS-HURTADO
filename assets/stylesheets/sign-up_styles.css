@@ -158,11 +158,24 @@ h1 {
     padding: 20px 0;
 }
 
+
+@keyframes latido {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
 .logo {
     height: 40px;
     width: auto;
     margin-right: 10px;
-
+    animation: latido 1s infinite;
 }
 
 .checkbox {

@@ -18,7 +18,7 @@ body {
     margin: 0;
     display: flex;
     justify-content: center;
-    
+
 }
 
 .app_wrapper {
@@ -64,13 +64,26 @@ h1 {
     font-family: cursive;
     padding: 20px 0;
     font-size: 2em;
+
+}
+
+@keyframes latido {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
 }
 
 .logo {
     height: 40px;
     width: auto;
     margin-right: 10px;
-
+    animation: latido 1s infinite;
 }
 
 .form-group {
