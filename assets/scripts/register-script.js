@@ -9,6 +9,7 @@ document.getElementById('btn').addEventListener('click', function () {
 
     if (!name || !lastname || !nameUser || !birthdate || !email || !password) {
         alert('Por favor, complete todos los campos.');
+        
     } else {
         document.getElementById('registrationForm').style.display = 'none';
         document.getElementById('preferencesForm').style.display = 'block';
