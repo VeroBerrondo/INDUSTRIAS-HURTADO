@@ -251,7 +251,7 @@
                 }
             }
         }
-        .cards__wrapper {
+        .cards__wrapper, .config__wrapper {
             width: 97%;
             height: 96%;
             padding: 1.5%;
@@ -274,6 +274,55 @@
                 place-content: center;
                 overflow: hidden;
                 transition: all ease 1s;
+                &.new_image {
+                    width: 400px;
+                    height: 500px;
+                    .card__content {
+                        .card__top {
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                        }
+                        .card__hidden {
+                            display: none;
+                        }
+                    }
+                    &.touched {
+                        &::before {
+                            width: 200%;
+                        }
+                    }
+                }
+                &.currentProfile {
+                    width: 700px;
+                    height: 500px;
+                    &::before {
+                        width: 289px;
+                    }
+                    &:hover, &.touched {
+                        &::before {
+                            height: 260%;  
+                        }
+                        .card__content .card__bottom {
+                            top: 0;
+                        }
+                    }
+                    .card__content {
+                        .card__top {
+                            top: 0;
+                            left: 0;
+                            right: 50%;
+                            bottom: 0;  
+                        }
+                        .card__bottom {
+                            top: 0;
+                            bottom: 0;
+                            left: 50%;
+                            right: 0;    
+                        }
+                    }
+                }
                 &::before {
                     content: "";
                     position: absolute;
@@ -282,7 +331,7 @@
                     height: 90%;
                     transition: all linear 1s;
                 }
-                &:hover {
+                &:hover, &.touched {
                     transform: scale(1.05);
                     &::before {
                         height: 130%;
@@ -670,5 +719,3 @@
         }
     }
 }
-
-/*Testing*/
