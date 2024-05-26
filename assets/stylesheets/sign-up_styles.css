@@ -152,7 +152,7 @@ input:hover {
 
 h1 {
     font-size: 2em;
-    font-family: cursive;
+    font-family:"caveat", cursive;
     display: flex;
     align-items: center;
     padding: 20px 0;

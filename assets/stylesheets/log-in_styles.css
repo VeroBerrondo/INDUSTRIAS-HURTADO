@@ -61,10 +61,10 @@ input:hover {
 
 h1 {
     color: #fff;
-    font-family: cursive;
-    padding: 20px 0;
-    font-size: 2em;
-
+    font-family:"caveat", cursive;
+    padding: 15px 0;
+    font-size: 3em;
+    animation: latido 1s infinite;
 }
 
 @keyframes latido {
