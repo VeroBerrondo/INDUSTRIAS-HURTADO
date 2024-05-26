@@ -39,6 +39,11 @@
     50% {transform: translateX(-5px) rotateZ(-45deg);}
     100% {transform: translateX(5px) rotateZ(45deg);}
 }
+@keyframes sweetroll-plus {
+    0% {transform: translateX(50px) rotateZ(45deg);}
+    50% {transform: translateX(-50px) rotateZ(-45deg);}
+    100% {transform: translateX(50px) rotateZ(45deg);}
+}
 
 .app__mount {
     border: 0;
@@ -48,6 +53,27 @@
     text-decoration: none;
     font-size: 14px;
     font-family: 'manrope';
+}
+
+.logotype {
+    border: 0;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color_pink-3);
+    transition: all ease 1s;
+    animation: sweetroll-plus 2.5s infinite;
+    .icon {
+        width: 60%;
+        color: var(--color_beige-1);
+        fill: currentColor;
+    }
+    &:hover {
+        transform: scale(1.1); 
+    }
 }
 
 .button {

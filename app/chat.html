@@ -205,7 +205,7 @@
                                             <use xlink:href="../assets/icons/svg-resources.xml#icon-kiss"></use>
                                         </svg>
                                     </button>
-                                    <input type="text" placeholder="Escribe un mensaje aquí..." autofocus ref="mensajeInput" @keypress.enter="enviarMensaje">
+                                    <input type="text" placeholder="Escribe un mensaje aquí..." autofocus id="mensajeInput" ref="mensajeInput" @keypress.enter="enviarMensaje">
                                 </div>
                                 <button class="button send" @click="enviarMensaje">
                                     <svg class="icon">

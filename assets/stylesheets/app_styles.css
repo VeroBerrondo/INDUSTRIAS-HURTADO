@@ -251,7 +251,7 @@
                 }
             }
         }
-        .cards__wrapper, .config__wrapper {
+        .cards__wrapper, .config__wrapper, .common__wrapper {
             width: 97%;
             height: 96%;
             padding: 1.5%;
@@ -431,6 +431,9 @@
                     }
                 }
             }
+        }
+        .common__wrapper {
+            align-items: center;
         }
     }
 }

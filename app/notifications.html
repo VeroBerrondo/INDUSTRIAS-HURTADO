@@ -7,23 +7,24 @@
     <title>HeartMate</title>
     <link rel="stylesheet" href="../assets/stylesheets/main_styles.css">
     <link rel="stylesheet" href="../assets/stylesheets/app_styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
 </head>
 <body>
-    <div class="app__mount">
-        <div class="nav-bar_mobile__wrapper">
+    <div class="app__mount" id="app__mount">
+        <div v-if="window.innerWidth < maxWidthToShowElement" class="nav-bar_mobile__wrapper">
             <button class="button iconed contrast tool" onclick="sideMenu_toggle()">
                 <svg class="icon">
                     <use xlink:href="../assets/icons/svg-resources.xml#icon-dot-menu"></use>
                 </svg>
             </button>
-            <label class="entry simple" for="search-chats">
-                <label for="search-chats">
+            <div class="entry simple">
+                <label for="local-search">
                     <svg class="icon">
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-search"></use>
                     </svg>
                 </label>
-                <input type="text" id="search-chats" placeholder="Buscar...">
-            </label>
+                <input id="local-search" type="text" placeholder="Buscar...">
+            </div>
             <nav class="menu__content">
                 <div class="outer-area" onclick="sideMenu_toggle()"></div>
                 <a class="button iconed contrast option back" onclick="sideMenu_toggle()">
@@ -62,9 +63,15 @@
                     </svg>
                     <p>Configuracion</p>
                 </a>
+                <a class="button iconed contrast option" @click="logout">
+                    <svg class="icon">
+                        <use xlink:href="../assets/icons/svg-resources.xml#icon-logout"></use>
+                    </svg>
+                    <p>Cerrar sesion</p>
+                </a>
             </nav> 
         </div>
-        <div class="nav-bar_desktop__wrapper">
+        <div v-else class="nav-bar_desktop__wrapper">
             <nav>
                 <a class="button iconed" href="./feed.html">
                     <svg class="icon">
@@ -91,11 +98,20 @@
                         <use xlink:href="../assets/icons/svg-resources.xml#icon-gear"></use>
                     </svg>
                 </a>
+                <button class="button iconed" id="enviarBtn" @click="logout">
+                    <svg class="icon">
+                        <use xlink:href="../assets/icons/svg-resources.xml#icon-logout"></use>
+                    </svg>
+                </button>
             </nav>    
         </div>
         <main class="app__wrapper">
+            <div class="common__wrapper">
+                <p>work in progress</p>
+            </div>
         </main>
     </div>
     <script src="../assets/scripts/design_module.js"></script>
+    <script type="module" src="../assets/scripts/common_systems.js"></script>
 </body>
 </html>
