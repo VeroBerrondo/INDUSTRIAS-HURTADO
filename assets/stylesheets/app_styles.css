@@ -410,6 +410,9 @@
                                 font-size: 24px;
                                 color: var(--color_red-2);
                                 margin: 5% 0;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
                             }
                         }
                         .card__options {
@@ -476,6 +479,45 @@
                     }
                     .fast-flicker {
                         animation: shine 2s forwards, blink 10s 1s infinite;
+                    }
+                }
+            }
+        }
+        .alert__wrapper {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 40;
+            background-color: #15151590;
+            &.hidden {
+                display: none;
+            }
+            .alert__content {
+                width: 25%;
+                height: 25%;
+                background-color: var(--color_white-2);
+                padding: 1.5%;
+                border-radius: 25px;
+                border: 2px solid var(--color_pink-3);
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                div {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    column-gap: 1.5%;
+                    .button {
+                        padding: 10%;
+                        width: 90%;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
                     }
                 }
             }

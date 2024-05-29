@@ -93,7 +93,7 @@ async function createUserCard(ImagesList, currentUserDict) {
         const profileURL = ImagesList[ "image" + imgID][0];
 
         const fecha = new Date(userData.birthdate);
-        const dia = fecha.getDate();
+        const dia = fecha.getDate() + 1;
         const mes = fecha.getMonth() + 1;
         const año = fecha.getFullYear();
 

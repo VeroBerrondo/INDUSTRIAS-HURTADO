@@ -28,7 +28,7 @@ onAuthStateChanged(auth, (user) => {
 
 // Limpiar el chat
 document.getElementById('limpiarChat').addEventListener('click', function () {
-    document.getElementById('mensajes').innerHTML = '';
+    
 })
 
 /*----- Funciones Varias -----*/
@@ -154,7 +154,6 @@ async function createMessages(messagesList, ImagesList) {
     });
 }
 
-
 /*----- Plantillas de Vue -----*/
 Vue.component('message-card', {
     props: ['data'],
@@ -191,6 +190,21 @@ new Vue({
         enviarMensaje() {
             const message = this.$refs.mensajeInput.value;
             sendMessage(message);
+        },
+        cleanChat() {
+            const alertBanner = this.$refs.AlertBanner;
+            alertBanner.classList.remove('hidden')
+            console.log("borrar?");
+        },
+        hiddenAlert() {
+            const alertBanner = this.$refs.AlertBanner;
+            alertBanner.classList.add('hidden')
+        },
+        alertTrue () {
+            const alertBanner = this.$refs.AlertBanner;
+            const messageWrapper = this.$refs.messageWrapper;
+            alertBanner.classList.add('hidden')
+            messageWrapper.innerHTML = '';
         },
         logout() {
             auth.signOut().then(() => {

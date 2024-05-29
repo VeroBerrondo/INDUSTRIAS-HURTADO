@@ -194,8 +194,17 @@
                             <p>Chat Global</p>
                         </div>
                         <div class="chat-tools__wrapper">
-                            <button id="limpiarChat">Limpiar Chat</button>
+                            <button class="button simple space" id="limpiarChat" @click="cleanChat">Limpiar Chat</button>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="alert__wrapper hidden" ref="AlertBanner">
+                <div class="alert__content">
+                    <p>Estas seguro de querer borrar los mensajes? esto eliminara todos los mensajes en la base de datos!</p>
+                    <div>
+                        <button class="button simple darker" @click="hiddenAlert">Cancelar</button>
+                        <button class="button simple" @click="alertTrue">Estoy seguro!</button>
                     </div>
                 </div>
             </div>

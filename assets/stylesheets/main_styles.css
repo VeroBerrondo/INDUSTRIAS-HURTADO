@@ -129,6 +129,13 @@
         &:hover, active {
             transform: scale(1.1);
         }
+        &.darker {
+            background-color: var(--color_gray-2);
+            color: var(--color_black-1);
+        }
+    }
+    &.space {
+        padding: 10%;
     }
     &.tool {
         aspect-ratio: 1/1;
