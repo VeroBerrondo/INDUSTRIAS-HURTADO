@@ -93,6 +93,13 @@ window.savePreferences = async function savePreferences() {
     // Obtener comentario
     const comments = document.getElementById('comments').value;
 
+    // Validar que todos los campos requeridos estén completos
+    if (!country || !city || !genderSelected || activitiesSelected.length === 0 || rangeSelected.length === 0) {
+      alert('Por favor complete todos los campos requeridos.');
+      
+    }
+
+
     // Guarda las preferencias del usuario en Firestore
     await setDoc(doc(db, "preferences", userId), {
 
@@ -111,7 +118,8 @@ window.savePreferences = async function savePreferences() {
     alert('Error al guardar preferencias: ' + error.message);
   }
 }
-
+// Agregar el evento de envío al formulario
+document.getElementById('preferences-form').addEventListener('submit', savePreferences);
 
 
 
