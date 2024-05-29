@@ -119,7 +119,7 @@ window.savePreferences = async function savePreferences() {
   }
 }
 // Agregar el evento de envío al formulario
-document.getElementById('preferences-form').addEventListener('submit', savePreferences);
+document.getElementById('preferencesForm').addEventListener('submit', savePreferences);
 
 
 
