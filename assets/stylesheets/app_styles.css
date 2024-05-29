@@ -684,6 +684,14 @@
             .cards__wrapper {
                 padding-top: 8%;
             }
+            .alert__wrapper .alert__content { 
+                width: 50%;
+                height: 30%;
+                div {
+                grid-template-columns: none;
+                grid-template-rows: 1fr 1fr;
+                }
+            }
         }
     }    
 }
