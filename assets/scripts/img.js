@@ -113,3 +113,4 @@ window.chooseImage = async function chooseImage(event) {
     }
   });
 }
+document.getElementById('formulario'), addEventListener('submit', chooseImage);
